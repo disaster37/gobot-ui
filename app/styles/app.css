@@ -1,0 +1,20 @@
+.dfp-header {
+  background-color: lightblue;
+  margin-bottom: 10px;
+}
+
+.dfp-footer {
+  margin-top: 50px;
+  bottom: 0px;
+  background-color: lightblue;
+  padding: 10px;
+  text-align: center;
+}
+
+.dfp-put-right {
+  right: 0px;
+}
+
+.dfp-badge-icon {
+margin: 10px;
+}

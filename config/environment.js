@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'dfp-ui',
     environment,
@@ -20,7 +20,23 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+      Namespace: 'backend/api',
+    },
+
+
+
+  };
+
+  ENV['ember-cli-mirage'] = {
+    enabled: false // off everywhere but demo
+  };
+
+  ENV['ember-simple-auth-token'] = {
+    authorizationHeaderName: 'Authorization', // Header name added to each API request
+    authorizationPrefix: 'Bearer ', // Prefix added to each API request
+    serverTokenEndpoint: '/backend/token-auth',
+    refreshAccessTokens: false,
+    refreshLeeway: 300 // refresh 5 minutes (300 seconds) before expiration
   };
 
   if (environment === 'development') {

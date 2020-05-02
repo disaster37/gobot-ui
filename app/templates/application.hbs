@@ -1,5 +1,209 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<div class="dfp-app container-fluid">
+  <header class="dfp-header">
+    <div class="row">
+      <div class="col-sm">
+        <h1>
+          Pond
+        </h1>
+      </div>
+      <div class="col-sm text-align">
+        <h2>
+          Home
+        </h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <span>
+          Status:
+          <StatusIcon @size="1.5em" @isOk={{true}} />
+        </span>
+      </div>
+      <div class="col-sm text-right">
+        <span>
+          Security: off
+        </span>
+        |
+        <span>
+          Emergency stop: off
+        </span>
+        |
+        <span>
+          Disable security: off
+        </span>
+      </div>
+    </div>
+  </header>
+  <div>
+    {{outlet}}
+  </div>
+  <footer class="dfp-footer page-footer">
+    <div class="row">
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-dark btn-outline-light text-center"
+        >
+          <svg
+            class="bi bi-house"
+            width="3em"
+            height="3em"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2 13.5V7h1v6.5a.5.5 0 00.5.5h9a.5.5 0 00.5-.5V7h1v6.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5zm11-11V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z"
+              clip-rule="evenodd"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <br />
+          Home
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-outline-light btn-dark text-center"
+        >
+          <svg
+            class="bi bi-pentagon"
+            width="3em"
+            height="3em"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 1.288l-6.842 5.56L3.733 15h8.534l2.575-8.153L8 1.288zM16 6.5L8 0 0 6.5 3 16h10l3-9.5z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <br />
+          Pund
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-dark btn-outline-light text-center"
+        >
+          <svg
+            class="bi bi-arrow-clockwise"
+            width="3em"
+            height="3em"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3.17 6.706a5 5 0 017.103-3.16.5.5 0 10.454-.892A6 6 0 1013.455 5.5a.5.5 0 00-.91.417 5 5 0 11-9.375.789z"
+              clip-rule="evenodd"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              d="M8.147.146a.5.5 0 01.707 0l2.5 2.5a.5.5 0 010 .708l-2.5 2.5a.5.5 0 11-.707-.708L10.293 3 8.147.854a.5.5 0 010-.708z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <br />
+          DFP
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-dark btn-outline-light text-center"
+        >
+          <svg
+            class="bi bi-droplet-half"
+            width="3em"
+            height="3em"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 01-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 005.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0010 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"
+              clip-rule="evenodd"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"
+              clip-rule="evenodd"
+            ></path>
+            <path d="M14 10a6 6 0 01-12 0s2.5 2.5 6.5.5S14 10 14 10z"></path>
+          </svg>
+          <br />
+          Tank
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-dark btn-outline-light text-center"
+        >
+          <svg
+            width="3em"
+            height="3em"
+            class="bi bi-graph-up"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"></path>
+            <path
+              fill-rule="evenodd"
+              d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"
+              clip-rule="evenodd"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              d="M10 3.5a.5.5 0 01.5-.5h4a.5.5 0 01.5.5v4a.5.5 0 01-1 0V4h-3.5a.5.5 0 01-.5-.5z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <br />
+          State
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-dark btn-outline-light text-center"
+        >
+          <svg
+            class="bi bi-gear"
+            width="3em"
+            height="3em"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 014.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 01-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 011.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 012.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 012.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 011.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 01-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 018.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 001.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 00.52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 00-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 00-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 00-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 00-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 00.52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 001.255-.52l.094-.319z"
+              clip-rule="evenodd"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              d="M8 5.754a2.246 2.246 0 100 4.492 2.246 2.246 0 000-4.492zM4.754 8a3.246 3.246 0 116.492 0 3.246 3.246 0 01-6.492 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <br />
+          Config
+        </button>
+      </div>
+    </div>
+  </footer>
+</div>

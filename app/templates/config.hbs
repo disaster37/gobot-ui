@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">
+        DFP config
+        <button type="button" {{on "click" (fn this.editForm "dfpConfig")}} class="btn btn-dark btn-sm float-right">Edit</button>
+      </h5>
+      <div class="card-body">
+        <p>
+            
+
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">
+        TFP config
+        <button type="button" {{on "click" (fn this.editForm "tfpConfig")}} class="btn btn-dark btn-sm float-right">Edit</button>
+      </h5>
+      <div class="card-body">
+        <p>
+            <form>
+                <div class="form-check">
+                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondPompRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.pondPumpRunning}}"  >
+                    <label for="tfpConfig.pondPumpRunning" class="form-check-label">Pond Pump running</label>
+                </div>
+                <div class="form-check">
+                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC1Running" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.UVC1Running}}"  >
+                    <label for="tfpConfig.UVC1Running" class="form-check-label">UVC1 running</label>
+                </div>
+                <div class="form-check">
+                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC2Running" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.UVC2Running}}"  >
+                    <label for="tfpConfig.UVC2Running" class="form-check-label">UVC2 running</label>
+                </div>
+                <div class="form-check">
+                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondBubbleRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.pondBubbleRunning}}"  >
+                    <label for="tfpConfig.pondBubbleRunning" class="form-check-label">Pond bubble running</label>
+                </div>
+                <div class="form-check">
+                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.filterBubbleRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.filterBubbleRunning}}"  >
+                    <label for="tfpConfig.filterBubbleRunning" class="form-check-label">Filter bubble running</label>
+                </div>
+                <div class="form-check">
+                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.waterfallPumpRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.waterfallPumpRunning}}"  >
+                    <label for="tfpConfig.waterfallPumpRunning" class="form-check-label">Waterfall pump running</label>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC1BlisterMaxTime" class="col-sm col-form-label">UVC1 Blister max time</label>
+                    <div class="col-sm">
+                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC1BlisterMaxTime" class="form-control" type="text" value="{{this.tfpConfig.UVC1BlisterMaxTime}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC2BlisterMaxTime" class="col-sm col-form-label">UVC2 Blister max time</label>
+                    <div class="col-sm">
+                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC2BlisterMaxTime" class="form-control" type="text" value="{{this.tfpConfig.UVC2BlisterMaxTime}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC1BlisterTime" class="col-sm col-form-label">UVC1 Blister time</label>
+                    <div class="col-sm">
+                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC1BlisterTime" class="form-control" type="text" value="{{moment-format this.tfpConfig.UVC1BlisterTime 'DD/MM/YYYY'}}">
+                       
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC2BlisterTime" class="col-sm col-form-label">UVC2 Blister time</label>
+                    <div class="col-sm">
+                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC2BlisterTime" class="form-control" type="text" value="{{moment-format this.tfpConfig.UVC2BlisterTime 'DD/MM/YYYY'}}">
+                    </div>
+                </div>
+                {{#unless this.tfpIsNotEdited}}
+                <button type="button" class="btn btn-primary" {{on "click" (fn this.saveTFPConfig "tfpConfig")}}>Save</button>
+                {{/unless}}
+            </form>
+            {{#each this.tfpConfig.errors.title as |error|}}
+              <div class="text-danger">{{error.message}}</div>
+            {{/each}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">
+        Tank config
+      </h5>
+      <div class="card-body">
+        <p>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,16 @@ import { decamelize } from '@ember/string';
 
 export default class ApplicationSerializer extends DS.JSONAPISerializer {
   keyForAttribute(key) {
-    return decamelize(key);
+    switch(key) {
+      case "UpdatedAt":
+        return "updatedAt";
+      case "CreatedAt":
+        return "createdAt";
+      case "DeletedAt":
+        return "deletedAt";
+      default:
+        return decamelize(key);
+    }
+    
   }
 }

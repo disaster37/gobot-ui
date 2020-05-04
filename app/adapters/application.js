@@ -16,4 +16,22 @@ export default class ApplicationAdapter extends JSONAPIAdapter.extend(TokenAutho
 
     return headers;
   }
+
+  /*
+  shouldReloadRecord(store, snapshot) {
+    return true;
+  }
+
+  shouldReloadAll(store, snapshot) {
+    return true;
+  }
+
+  shouldBackgroundReloadRecord(store, snapshot) {
+    return false;
+  }
+
+  shouldBackgroundReloadAll(store, snapshot) {
+    return false;
+  }
+  */
 }

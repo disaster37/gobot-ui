@@ -1,13 +1,15 @@
 <div class="btn-group" role="group">
   <button
     type="button"
-    class="btn btn-secondary {{if @isOn "btn-success active" "disabled"}}"
+    class="btn btn-secondary {{if this.isOn "btn-success active" "disabled"}}"
+    {{on "click" (fn this.change true)}}
   >
     On
   </button>
   <button
     type="button"
-    class="btn btn-secondary {{unless @isOn "btn-danger active" "disabled"}}"
+    class="btn btn-secondary {{unless this.isOn "btn-danger active" "disabled"}}"
+    {{on "click" (fn this.change false)}}
   >
     Off
   </button>

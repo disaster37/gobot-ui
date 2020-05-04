@@ -3,7 +3,6 @@
     <div class="card">
       <h5 class="card-header">
         Pond
-        {{@model.waterfallPumpRunning}}
       </h5>
       <div class="card-body">
         <p>
@@ -13,7 +12,7 @@
                 Pond pump
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                <ButtonOnOff @isOn={{tfpConfig.pondPumpRunning}} @service={{tfpService}} @actionOn="startPondPump" @actionOff="stopPondPump" />
               </td>
             </tr>
             <tr>
@@ -21,7 +20,7 @@
                 UVC1
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                <ButtonOnOff @isOn={{tfpConfig.UVC1Running}} @service={{tfpService}} @actionOn="startUVC1" @actionOff="stopUVC1" />
               </td>
             </tr>
             <tr>
@@ -29,7 +28,7 @@
                 UVC2
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                <ButtonOnOff @isOn={{tfpConfig.UVC2Running}} @service={{tfpService}} @actionOn="startUVC2" @actionOff="stopUVC2" />
               </td>
             </tr>
             <tr>
@@ -37,7 +36,7 @@
                 Pond bubble
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                <ButtonOnOff @isOn={{tfpConfig.pondBubbleRunning}} @service={{tfpService}} @actionOn="startPondBubble" @actionOff="stopPondBubble" />
               </td>
             </tr>
             <tr>
@@ -45,7 +44,7 @@
                 Filter bubble
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                <ButtonOnOff @date={{tfpConfig.updatedAt}} @isOn={{tfpConfig.filterBubbleRunning}} @service={{tfpService}} @actionOn="startFilterBubble" @actionOff="stopFilterBubble" />
               </td>
             </tr>
             <tr>
@@ -53,7 +52,7 @@
                 Waterfall pump
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                <ButtonOnOff @isOn={{tfpConfig.waterfallPumpRunning}} @service={{tfpService}} @actionOn="startWaterfallPump" @actionOff="stopWaterfallPump" />
               </td>
             </tr>
             <tr>
@@ -61,7 +60,7 @@
                 UVC1 blister
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                Ok
               </td>
             </tr>
             <tr>
@@ -69,7 +68,7 @@
                 UVC2 blister
               </th>
               <td>
-                <ButtonOnOff @isOn={{true}} />
+                Ok
               </td>
             </tr>
           </table>

@@ -10,4 +10,5 @@ Router.map(function () {
   this.route('tfp-config');
   this.route('home');
   this.route('login');
+  this.route('config');
 });

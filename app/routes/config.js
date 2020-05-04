@@ -1,13 +1,12 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
-export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
+export default class ConfigRoute extends Route.extend(AuthenticatedRouteMixin) {
 
   model = function (params) {
-    var tfpConfig = this.store.findAll('tfp-config', { reload: true });
-    //tfpConfig.reload();
     return Ember.RSVP.hash({
-      tfpConfig: tfpConfig,
+      tfpConfig: this.store.findAll('tfp-config'),
+      dfpConfig: this.store.findAll('dfp-config'),
     });
     
   }
@@ -15,6 +14,7 @@ export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
   setupController(controller, model) {
     this._super(controller, model);
     controller.set('tfpConfig', model.tfpConfig.firstObject);
+    controller.set('dfpConfig', model.dfpConfig.firstObject);
 
   }
 }

@@ -1,17 +1,32 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
 
 export default class LoginController extends Controller {
   @service('session') sessionManager;
 
-  actions = {
-    authenticate: function () {
-      const credentials = this.getProperties('username', 'password');
-      const authenticator = 'authenticator:jwt'; // or 'authenticator:jwt'
+  @tracked errorMessage;
 
-      console.log(credentials);
+  @action
+  async authenticate() {
+    const credentials = this.getProperties('username', 'password');
+    const authenticator = 'authenticator:jwt'; // or 'authenticator:jwt'
 
-      this.sessionManager.authenticate(authenticator, credentials);
+    try {
+      await this.sessionManager.authenticate(authenticator, credentials);
+    } catch(error) {
+      if (error.status == 401) {
+        this.errorMessage = "Login failed"
+      } else {
+        this.errorMessage = error.json.message;
+      }
     }
+
+    if(this.sessionManager.isAuthenticated) {
+      this.transitionToRoute("/home");
+    }
+    
   }
+  
 }

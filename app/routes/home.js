@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import { action } from "@ember/object";
 
 export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
 
@@ -16,5 +17,10 @@ export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
     this._super(controller, model);
     controller.set('tfpConfig', model.tfpConfig.firstObject);
 
+  }
+
+  @action
+  refresh() {
+    this.refresh();
   }
 }

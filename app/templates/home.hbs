@@ -7,12 +7,13 @@
       <div class="card-body">
         <p>
           <table class="table">
+            <tbody>
             <tr>
               <th>
                 Pond pump
               </th>
               <td>
-                <ButtonOnOff @isOn={{tfpConfig.pondPumpRunning}} @service={{tfpService}} @actionOn="startPondPump" @actionOff="stopPondPump" />
+                <ButtonOnOff @isOn={{this.tfpConfig.pondPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondPump" @actionOff="stopPondPump" @error="tfpError" />
               </td>
             </tr>
             <tr>
@@ -20,7 +21,7 @@
                 UVC1
               </th>
               <td>
-                <ButtonOnOff @isOn={{tfpConfig.UVC1Running}} @service={{tfpService}} @actionOn="startUVC1" @actionOff="stopUVC1" />
+                <ButtonOnOff @isOn={{this.tfpConfig.UVC1Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC1" @actionOff="stopUVC1" @error="tfpError" />
               </td>
             </tr>
             <tr>
@@ -28,7 +29,7 @@
                 UVC2
               </th>
               <td>
-                <ButtonOnOff @isOn={{tfpConfig.UVC2Running}} @service={{tfpService}} @actionOn="startUVC2" @actionOff="stopUVC2" />
+                <ButtonOnOff @isOn={{this.tfpConfig.UVC2Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC2" @actionOff="stopUVC2" @error="tfpError" />
               </td>
             </tr>
             <tr>
@@ -36,7 +37,7 @@
                 Pond bubble
               </th>
               <td>
-                <ButtonOnOff @isOn={{tfpConfig.pondBubbleRunning}} @service={{tfpService}} @actionOn="startPondBubble" @actionOff="stopPondBubble" />
+                <ButtonOnOff @isOn={{this.tfpConfig.pondBubbleRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondBubble" @actionOff="stopPondBubble" @error="tfpError" />
               </td>
             </tr>
             <tr>
@@ -44,7 +45,7 @@
                 Filter bubble
               </th>
               <td>
-                <ButtonOnOff @date={{tfpConfig.updatedAt}} @isOn={{tfpConfig.filterBubbleRunning}} @service={{tfpService}} @actionOn="startFilterBubble" @actionOff="stopFilterBubble" />
+                <ButtonOnOff @refresh={{this.refresh}} @isOn={{this.tfpConfig.filterBubbleRunning}} @service={{this.tfpService}} @actionOn="startFilterBubble" @actionOff="stopFilterBubble" @error="tfpError" />
               </td>
             </tr>
             <tr>
@@ -52,7 +53,7 @@
                 Waterfall pump
               </th>
               <td>
-                <ButtonOnOff @isOn={{tfpConfig.waterfallPumpRunning}} @service={{tfpService}} @actionOn="startWaterfallPump" @actionOff="stopWaterfallPump" />
+                <ButtonOnOff @isOn={{this.tfpConfig.waterfallPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startWaterfallPump" @actionOff="stopWaterfallPump" @error="tfpError" />
               </td>
             </tr>
             <tr>
@@ -71,6 +72,12 @@
                 Ok
               </td>
             </tr>
+            </tbody>
+            <tfoot>
+              {{#if this.tfpError}}
+                <p class="text-danger">{{this.tfpError}}</p>
+              {{/if}}
+            </tfoot>
           </table>
         </p>
       </div>
@@ -83,7 +90,8 @@
       </h5>
       <div class="card-body">
         <p>
-          <table class="table">
+          <table class="table" >
+            <tbody>
             <tr>
               <th>
                 Auto
@@ -132,6 +140,12 @@
                 120l en 24h
               </td>
             </tr>
+            </tbody>
+            <tfoot>
+              {{#if this.tfpError}}
+                <p class="text-danger">{{this.dfpError}}</p>
+              {{/if}}
+            </tfoot>
           </table>
         </p>
       </div>
@@ -145,6 +159,7 @@
       <div class="card-body">
         <p>
           <table class="table">
+            <tbody>
             <tr>
               <th>
                 Auto
@@ -185,6 +200,12 @@
                 1200l
               </td>
             </tr>
+            </tbody>
+            <tfoot>
+              {{#if this.tfpError}}
+                <p class="text-danger">{{this.dfpError}}</p>
+              {{/if}}
+            </tfoot>
           </table>
         </p>
       </div>

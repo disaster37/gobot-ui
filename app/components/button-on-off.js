@@ -7,18 +7,28 @@ export default class ButtonOnOffComponent extends Component {
     @tracked actionOn = this.args.actionOn;
     @tracked actionOff = this.args.actionOff;
     @tracked service = this.args.service;
+    @tracked refresh = this.args.refresh;
+    @tracked error = this.args.error;
 
     @action
     change(isOn){
         console.log("New state: " + isOn);
+        let res;
         if(isOn){
-            this.service.call(this.actionOn);
+            res = this.service.call(this.actionOn);
         }
         else {
-            this.service.call(this.actionOff);
+            res = this.service.call(this.actionOff);
         }
         
-        this.isOn = isOn;
+        res.then(function(data) {
+            this.isOn = isOn;
+        }).catch(function(error) {
+            this.error = error;
+        })
+        
+
+        this.refresh();
     }
 
 }

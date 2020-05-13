@@ -13,5 +13,6 @@ export default class TfpconfigModel extends Model {
   @attr('number') UVC2BlisterMaxTime;
   @attr('date') BacteriumTime;
   @attr('date') updatedAt;
+  @attr('date') createdAt;
   @attr('number') version;
 }

@@ -8,7 +8,7 @@ export default class ButtonOnOffComponent extends Component {
     @tracked actionOff = this.args.actionOff;
     @tracked service = this.args.service;
     @tracked refresh = this.args.refresh;
-    @tracked error = this.args.error;
+    @tracked setError = this.args.error;
 
     @action
     change(isOn){
@@ -21,13 +21,12 @@ export default class ButtonOnOffComponent extends Component {
             res = this.service.call(this.actionOff);
         }
         
-        res.then(function(data) {
-            this.isOn = isOn;
-        }).catch(function(error) {
-            this.error = error;
+        res.then(result => {
+         this.isOn = isOn;  
+        }).catch(error => {
+            this.setError(error);
         })
         
-
         this.refresh();
     }
 

@@ -22,61 +22,60 @@
       </h5>
       <div class="card-body">
         <p>
-            <form>
+            <form >
                 <div class="form-check">
-                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondPompRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.pondPumpRunning}}"  >
-                    <label for="tfpConfig.pondPumpRunning" class="form-check-label">Pond Pump running</label>
+                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondPompRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.pondPumpRunning}} />
+                    <label for="tfpConfig.pondPumpRunning" class="form-check-label">Pond Pump running {{this.tfpConfig.pondPumpRunning}}</label>
                 </div>
                 <div class="form-check">
-                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC1Running" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.UVC1Running}}"  >
+                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC1Running" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.UVC1Running}}  />
                     <label for="tfpConfig.UVC1Running" class="form-check-label">UVC1 running</label>
                 </div>
                 <div class="form-check">
-                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC2Running" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.UVC2Running}}"  >
+                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC2Running" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.UVC2Running}}  />
                     <label for="tfpConfig.UVC2Running" class="form-check-label">UVC2 running</label>
                 </div>
                 <div class="form-check">
-                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondBubbleRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.pondBubbleRunning}}"  >
+                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondBubbleRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.pondBubbleRunning}}  />
                     <label for="tfpConfig.pondBubbleRunning" class="form-check-label">Pond bubble running</label>
                 </div>
                 <div class="form-check">
-                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.filterBubbleRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.filterBubbleRunning}}"  >
-                    <label for="tfpConfig.filterBubbleRunning" class="form-check-label">Filter bubble running</label>
+                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.filterBubbleRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.filterBubbleRunning}}  />
+                    <label for="tfpConfig.filterBubblerRunning" class="form-check-label">Filter bubble running</label>
                 </div>
                 <div class="form-check">
-                    <input disabled={{this.tfpIsNotEdited}} id="tfpConfig.waterfallPumpRunning" class="form-check-input" type="checkbox" value="1" checked="{{this.tfpConfig.waterfallPumpRunning}}"  >
+                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.waterfallPumpRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.waterfallPumpRunning}}  />
                     <label for="tfpConfig.waterfallPumpRunning" class="form-check-label">Waterfall pump running</label>
                 </div>
                 <div class="form-group row">
                     <label for="tfpConfig.UVC1BlisterMaxTime" class="col-sm col-form-label">UVC1 Blister max time</label>
                     <div class="col-sm">
-                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC1BlisterMaxTime" class="form-control" type="text" value="{{this.tfpConfig.UVC1BlisterMaxTime}}">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC1BlisterMaxTime" class="form-control" @type="text" @value={{this.tfpConfig.UVC1BlisterMaxTime}} />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tfpConfig.UVC2BlisterMaxTime" class="col-sm col-form-label">UVC2 Blister max time</label>
                     <div class="col-sm">
-                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC2BlisterMaxTime" class="form-control" type="text" value="{{this.tfpConfig.UVC2BlisterMaxTime}}">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC2BlisterMaxTime" class="form-control" @type="text" @value={{this.tfpConfig.UVC2BlisterMaxTime}} />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tfpConfig.UVC1BlisterTime" class="col-sm col-form-label">UVC1 Blister time</label>
                     <div class="col-sm">
-                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC1BlisterTime" class="form-control" type="text" value="{{moment-format this.tfpConfig.UVC1BlisterTime 'DD/MM/YYYY'}}">
-                       
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC1BlisterTime" class="form-control" @type="string" @value={{this.tfpUVC1BlisterTime}} />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tfpConfig.UVC2BlisterTime" class="col-sm col-form-label">UVC2 Blister time</label>
                     <div class="col-sm">
-                        <input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC2BlisterTime" class="form-control" type="text" value="{{moment-format this.tfpConfig.UVC2BlisterTime 'DD/MM/YYYY'}}">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC2BlisterTime" class="form-control" @type="string" @value={{this.tfpUVC2BlisterTime}} />
                     </div>
                 </div>
                 {{#unless this.tfpIsNotEdited}}
-                <button type="button" class="btn btn-primary" {{on "click" (fn this.saveTFPConfig "tfpConfig")}}>Save</button>
+                <button type="submit" class="btn btn-primary" {{on "click" (fn this.saveTFPConfig)}}>Save</button>
                 {{/unless}}
             </form>
-            {{#each this.tfpConfig.errors.title as |error|}}
+            {{#each this.tfpConfig.errors as |error|}}
               <div class="text-danger">{{error.message}}</div>
             {{/each}}
         </p>

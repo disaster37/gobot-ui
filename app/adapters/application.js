@@ -12,6 +12,8 @@ export default class ApplicationAdapter extends JSONAPIAdapter.extend(TokenAutho
     if (this.session.isAuthenticated) {
       // OAuth 2
       headers['Authorization'] = `Bearer ${this.session.data.authenticated.token}`;
+      headers['content-type'] = 'application/json';
+      headers['']
     }
 
     return headers;

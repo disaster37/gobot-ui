@@ -8,18 +8,18 @@ export default class TfpService extends Service {
 
   call(name) {
     switch(name) {
-      case "startPondPump": this.startPondPump(); break;
-      case "stopPondPump": this.stopPondPump(); break;
-      case "startUVC1": this.startUVC1(); break;
-      case "stopUVC1": this.stopUVC1(); break;
-      case "startUVC2": this.startUVC2(); break;
-      case "stopUVC2": this.stopUVC2(); break;
-      case "startPondBubble": this.startPondBubble(); break;
-      case "stopPondBubble": this.stopPondBubble(); break;
-      case "startFilterBubble": this.startFilterBubble(); break;
-      case "stopFilterBubble": this.stopFilterBubble(); break;
-      case "startWaterfallPump": this.startWaterfallPump(); break;
-      case "stopWaterfallPump": this.stopWaterfallPump(); break;
+      case "startPondPump": return this.startPondPump(); break;
+      case "stopPondPump": return this.stopPondPump(); break;
+      case "startUVC1": return this.startUVC1(); break;
+      case "stopUVC1": return this.stopUVC1(); break;
+      case "startUVC2": return this.startUVC2(); break;
+      case "stopUVC2": return this.stopUVC2(); break;
+      case "startPondBubble": return this.startPondBubble(); break;
+      case "stopPondBubble": return this.stopPondBubble(); break;
+      case "startFilterBubble": return this.startFilterBubble(); break;
+      case "stopFilterBubble": return this.stopFilterBubble(); break;
+      case "startWaterfallPump": return this.startWaterfallPump(); break;
+      case "stopWaterfallPump": return this.stopWaterfallPump(); break;
     };
   }
 

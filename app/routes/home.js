@@ -20,7 +20,7 @@ export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
   }
 
   @action
-  refresh() {
+  refreshRoute() {
     this.refresh();
   }
 }

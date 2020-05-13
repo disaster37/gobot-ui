@@ -13,7 +13,7 @@
                 Pond pump
               </th>
               <td>
-                <ButtonOnOff @isOn={{this.tfpConfig.pondPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondPump" @actionOff="stopPondPump" @error="tfpError" />
+                <ButtonOnOff @isOn={{this.tfpConfig.pondPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondPump" @actionOff="stopPondPump" @error={{this.setTFPError}} />
               </td>
             </tr>
             <tr>
@@ -21,7 +21,7 @@
                 UVC1
               </th>
               <td>
-                <ButtonOnOff @isOn={{this.tfpConfig.UVC1Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC1" @actionOff="stopUVC1" @error="tfpError" />
+                <ButtonOnOff @isOn={{this.tfpConfig.UVC1Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC1" @actionOff="stopUVC1" @error={{this.setTFPError}} />
               </td>
             </tr>
             <tr>
@@ -29,7 +29,7 @@
                 UVC2
               </th>
               <td>
-                <ButtonOnOff @isOn={{this.tfpConfig.UVC2Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC2" @actionOff="stopUVC2" @error="tfpError" />
+                <ButtonOnOff @isOn={{this.tfpConfig.UVC2Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC2" @actionOff="stopUVC2" @error={{this.setTFPError}} />
               </td>
             </tr>
             <tr>
@@ -37,7 +37,7 @@
                 Pond bubble
               </th>
               <td>
-                <ButtonOnOff @isOn={{this.tfpConfig.pondBubbleRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondBubble" @actionOff="stopPondBubble" @error="tfpError" />
+                <ButtonOnOff @isOn={{this.tfpConfig.pondBubbleRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondBubble" @actionOff="stopPondBubble" @error={{this.setTFPError}} />
               </td>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
                 Filter bubble
               </th>
               <td>
-                <ButtonOnOff @refresh={{this.refresh}} @isOn={{this.tfpConfig.filterBubbleRunning}} @service={{this.tfpService}} @actionOn="startFilterBubble" @actionOff="stopFilterBubble" @error="tfpError" />
+                <ButtonOnOff @refresh={{this.refresh}} @isOn={{this.tfpConfig.filterBubbleRunning}} @service={{this.tfpService}} @actionOn="startFilterBubble" @actionOff="stopFilterBubble" @error={{this.setTFPError}} />
               </td>
             </tr>
             <tr>
@@ -53,7 +53,7 @@
                 Waterfall pump
               </th>
               <td>
-                <ButtonOnOff @isOn={{this.tfpConfig.waterfallPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startWaterfallPump" @actionOff="stopWaterfallPump" @error="tfpError" />
+                <ButtonOnOff @isOn={{this.tfpConfig.waterfallPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startWaterfallPump" @actionOff="stopWaterfallPump" @error={{this.setTFPError}} />
               </td>
             </tr>
             <tr>
@@ -61,7 +61,7 @@
                 UVC1 blister
               </th>
               <td>
-                Ok
+                <StatusIcon @size="2em" @isOk={{this.isTFPUVC1BlisterOk}} />
               </td>
             </tr>
             <tr>
@@ -69,7 +69,7 @@
                 UVC2 blister
               </th>
               <td>
-                Ok
+                <StatusIcon @size="2em" @isOk={{this.isTFPUVC2BlisterOk}} />
               </td>
             </tr>
             </tbody>

@@ -23,7 +23,7 @@ export default class HomeController extends Controller {
 
     @computed
     get isTFPUVC1BlisterOk() {
-        const nbHours = moment().diff(moment(this.tfpConfig.UVC1BlisterTime), 'hours');
+        const nbHours = moment().diff(moment(this.tfpState.UVC1BlisterTime), 'hours');
         if(this.tfpConfig.UVC1BlisterMaxTime > nbHours) {
             return true;
         }
@@ -34,8 +34,19 @@ export default class HomeController extends Controller {
 
     @computed
     get isTFPUVC2BlisterOk() {
-        const nbHours = moment().diff(moment(this.tfpConfig.UVC2BlisterTime), 'hours');
+        const nbHours = moment().diff(moment(this.tfpState.UVC2BlisterTime), 'hours');
         if(this.tfpConfig.UVC2BlisterMaxTime > nbHours) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @computed
+    get isTFPOzoneBlisterOk() {
+        const nbHours = moment().diff(moment(this.tfpState.ozoneBlisterTime), 'hours');
+        if(this.tfpConfig.ozoneBlisterMaxTime > nbHours) {
             return true;
         }
         else {

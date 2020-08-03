@@ -5,18 +5,22 @@ import { action } from "@ember/object";
 export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
 
   model = function (params) {
-    var tfpConfig = this.store.findAll('tfp-config', { reload: true });
-    //tfpConfig.reload();
+    var tfpState = this.store.findAll('tfp-state', { reload: true });
+    var tfpConfig = this.store.findAll('tfp-config', {reload: true});
+    var tank = this.store.findAll('tank', {reload: true});
     return Ember.RSVP.hash({
+      tfpState: tfpState,
       tfpConfig: tfpConfig,
+      tank: tank
     });
     
   }
 
   setupController(controller, model) {
     this._super(controller, model);
+    controller.set('tfpState', model.tfpState.firstObject);
     controller.set('tfpConfig', model.tfpConfig.firstObject);
-
+    controller.set('tank', model.tank.firstObject);
   }
 
   @action

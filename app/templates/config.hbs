@@ -23,30 +23,6 @@
       <div class="card-body">
         <p>
             <form >
-                <div class="form-check">
-                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondPompRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.pondPumpRunning}} />
-                    <label for="tfpConfig.pondPumpRunning" class="form-check-label">Pond Pump running {{this.tfpConfig.pondPumpRunning}}</label>
-                </div>
-                <div class="form-check">
-                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC1Running" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.UVC1Running}}  />
-                    <label for="tfpConfig.UVC1Running" class="form-check-label">UVC1 running</label>
-                </div>
-                <div class="form-check">
-                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.UVC2Running" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.UVC2Running}}  />
-                    <label for="tfpConfig.UVC2Running" class="form-check-label">UVC2 running</label>
-                </div>
-                <div class="form-check">
-                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.pondBubbleRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.pondBubbleRunning}}  />
-                    <label for="tfpConfig.pondBubbleRunning" class="form-check-label">Pond bubble running</label>
-                </div>
-                <div class="form-check">
-                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.filterBubbleRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.filterBubbleRunning}}  />
-                    <label for="tfpConfig.filterBubblerRunning" class="form-check-label">Filter bubble running</label>
-                </div>
-                <div class="form-check">
-                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.waterfallPumpRunning" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.waterfallPumpRunning}}  />
-                    <label for="tfpConfig.waterfallPumpRunning" class="form-check-label">Waterfall pump running</label>
-                </div>
                 <div class="form-group row">
                     <label for="tfpConfig.UVC1BlisterMaxTime" class="col-sm col-form-label">UVC1 Blister max time</label>
                     <div class="col-sm">
@@ -60,6 +36,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="tfpConfig.ozoneBlisterMaxTime" class="col-sm col-form-label">Ozone Blister max time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.ozoneBlisterMaxTime" class="form-control" @type="text" @value={{this.tfpConfig.ozoneBlisterMaxTime}} />
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="tfpConfig.UVC1BlisterTime" class="col-sm col-form-label">UVC1 Blister time</label>
                     <div class="col-sm">
                         <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC1BlisterTime" class="form-control" @type="string" @value={{this.tfpUVC1BlisterTime}} />
@@ -69,6 +51,34 @@
                     <label for="tfpConfig.UVC2BlisterTime" class="col-sm col-form-label">UVC2 Blister time</label>
                     <div class="col-sm">
                         <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.UVC2BlisterTime" class="form-control" @type="string" @value={{this.tfpUVC2BlisterTime}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.ozoneBlisterTime" class="col-sm col-form-label">Ozone Blister time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.ozoneBlisterTime" class="form-control" @type="string" @value={{this.tfpOzoneBlisterTime}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.mode" class="col-sm col-form-label">Mode</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.mode" class="form-control" @type="string" @value={{this.tfpConfig.mode}} />
+                    </div>
+                </div>
+                <div class="form-check">
+                    <Input disabled={{this.tfpIsNotEdited}} id="tfpConfig.isWaterfallAuto" class="form-check-input" @type="checkbox" @checked={{this.tfpConfig.isWaterfallAuto}}  />
+                    <label for="tfpConfig.isWaterfallAuto" class="form-check-label">Waterfall auto</label>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.startTimeWaterfall" class="col-sm col-form-label">Start time waterfall</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.startTimeWaterfall" class="form-control" @type="string" @value={{this.tfpConfig.startTimeWaterfall}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.stopTimeWaterfall" class="col-sm col-form-label">Stop time waterfall</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.tfpIsNotEdited}} id="tfpConfig.stopTimeWaterfall" class="form-control" @type="string" @value={{this.tfpConfig.stopTimeWaterfall}} />
                     </div>
                 </div>
                 {{#unless this.tfpIsNotEdited}}

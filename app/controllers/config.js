@@ -16,6 +16,9 @@ export default class ConfigController extends Controller {
     @tracked
     tfpUVC2BlisterTime = moment(this.tfpConfig.UVC2BlisterTime).format('DD/MM/YYYY');
 
+    @tracked
+    tfpOzoneBlisterTime = moment(this.tfpConfig.ozoneBlisterTime).format('DD/MM/YYYY');
+
 
     @action
     editForm(name) {
@@ -34,16 +37,16 @@ export default class ConfigController extends Controller {
         event.preventDefault();
         
         const data = {
-            pondPumpRunning: this.tfpConfig.pondPumpRunning,
-            UVC1Running: this.tfpConfig.UVC1Running,
-            UVC2Running: this.tfpConfig.UVC2Running,
-            pondBubbleRunning: this.tfpConfig.pondBubbleRunning,
-            filterBubbleRunning: this.tfpConfig.filterBubbleRunning,
-            waterfallPumpRunning: this.tfpConfig.waterfallPumpRunning,
             UVC1BlisterMaxTime: this.tfpConfig.UVC1BlisterMaxTime,
             UVC2BlisterMaxTime: this.tfpConfig.UVC2BlisterMaxTime,
+            ozoneBlisterMaxTime: this.tfpConfig.ozoneBlisterMaxTime,
             UVC1BlisterTime: moment(this.tfpUVC1BlisterTime, 'DD/MM/YYYY').toDate(),
             UVC2BlisterTime: moment(this.tfpUVC2BlisterTime, 'DD/MM/YYYY').toDate(),
+            ozoneBlisterTime: moment(this.tfpOzoneBlisterTime, 'DD/MM/YYYY').toDate(),
+            mode: this.tfpConfig.mode,
+            isWaterfallAuto: this.tfpConfig.isWaterfallAuto,
+            startTimeWaterfall: this.tfpConfig.startTimeWaterfall,
+            stopTimeWaterfall: this.tfpConfig.stopTimeWaterfall,
             version: this.tfpConfig.version,
         };
         

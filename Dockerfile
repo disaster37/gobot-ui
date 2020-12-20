@@ -8,4 +8,5 @@ RUN ember build --environment production
 
 
 FROM nginx:1.19
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 COPY --from=builder /node/app/dist /usr/share/nginx/html

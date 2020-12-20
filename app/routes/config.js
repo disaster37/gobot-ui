@@ -1,10 +1,11 @@
+import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default class ConfigRoute extends Route.extend(AuthenticatedRouteMixin) {
 
   model = function (params) {
-    return Ember.RSVP.hash({
+    return hash({
       tfpConfig: this.store.findAll('tfp-config'),
       dfpConfig: this.store.findAll('dfp-config'),
     });

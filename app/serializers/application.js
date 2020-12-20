@@ -1,7 +1,7 @@
-import DS from 'ember-data';
+import JSONAPISerializer from '@ember-data/serializer/json-api';
 import { decamelize } from '@ember/string';
 
-export default class ApplicationSerializer extends DS.JSONAPISerializer {
+export default class ApplicationSerializer extends JSONAPISerializer {
   keyForAttribute(key) {
     return decamelize(key);
   }

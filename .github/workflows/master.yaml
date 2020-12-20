@@ -17,7 +17,7 @@ jobs:
         id: qemu
         uses: docker/setup-qemu-action@v1
         with:
-          image: tonistiigi/binfmt:buildkit-master
+          image: tonistiigi/binfmt:buildkit
           platforms: all
       - name: Set up Docker Buildx
         id: buildx

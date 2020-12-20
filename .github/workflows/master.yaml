@@ -48,5 +48,5 @@ jobs:
           platforms: linux/arm/v8
           push: true
           tags: |
-            disaster/dfp-api:${GITHUB_REF#refs/tags/}
+            disaster/dfp-ui:${GITHUB_REF#refs/tags/}
       

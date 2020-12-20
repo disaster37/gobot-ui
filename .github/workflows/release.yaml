@@ -43,7 +43,7 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: |
-            disaster/dfp-api:master
+            disaster/dfp-ui:master
       - name: Build and push release
         if: contains(github.ref, 'refs/tags')
         id: docker_build_release

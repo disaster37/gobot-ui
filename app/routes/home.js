@@ -27,5 +27,6 @@ export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
   @action
   refreshRoute() {
     this.refresh();
+    console.log("Route refreshed");
   }
 }

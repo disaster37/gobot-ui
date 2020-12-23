@@ -1,0 +1,119 @@
+<div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">
+        TFP control
+      </h5>
+      <div class="card-body">
+        <p>
+          <table class="table">
+            <tbody>
+            <tr>
+              <th>
+                Pond pump
+              </th>
+              <td>
+                <ButtonOnOff @isOn={{this.state.pondPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondPump" @actionOff="stopPondPump" @error={{this.setError}} />
+              </td>
+            </tr>
+            {{#if (not-eq this.config.mode "none")}}
+            <tr>
+              <th>
+                UVC1
+              </th>
+              <td>
+                <ButtonOnOff @isOn={{this.state.UVC1Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC1" @actionOff="stopUVC1" @error={{this.setError}} />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                {{#if (eq this.config.mode "UVC")}}
+                UVC2
+                {{else if (eq this.config.mode "ozone")}}
+                Ozone
+                {{/if}}
+              </th>
+              <td>
+                <ButtonOnOff @isOn={{this.state.UVC2Running}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startUVC2" @actionOff="stopUVC2" @error={{this.setError}} />
+              </td>
+            </tr>
+            {{/if}}
+            <tr>
+              <th>
+                Pond bubble
+              </th>
+              <td>
+                <ButtonOnOff @isOn={{this.state.pondBubbleRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startPondBubble" @actionOff="stopPondBubble" @error={{this.setError}} />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Filter bubble
+              </th>
+              <td>
+                <ButtonOnOff @refresh={{this.refresh}} @isOn={{this.state.filterBubbleRunning}} @service={{this.tfpService}} @actionOn="startFilterBubble" @actionOff="stopFilterBubble" @error={{this.setError}} />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Waterfall pump
+              </th>
+              <td>
+                <ButtonOnOff @isOn={{this.state.waterfallPumpRunning}} @refresh={{this.refresh}} @service={{this.tfpService}} @actionOn="startWaterfallPump" @actionOff="stopWaterfallPump" @error={{this.setError}} />
+                {{#if this.config.isWaterfallAuto}}
+                  {{#if this.state.acknoledgeWaterfallAuto}}
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07a7.002 7.002 0 0 1 3.537 12.26l.817.816a.5.5 0 0 1-.708.708l-.924-.925A6.967 6.967 0 0 1 8 16a6.967 6.967 0 0 1-3.722-1.07l-.924.924a.5.5 0 0 1-.708-.708l.817-.816A7.002 7.002 0 0 1 7 2.07V1H5.999a.5.5 0 0 1-.5-.5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1zm-5 4a.5.5 0 0 0-1 0v3.882l-1.447 2.894a.5.5 0 1 0 .894.448l1.5-3A.5.5 0 0 0 8.5 9V5z"/>
+</svg>
+                  {{else}}
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8 15A6 6 0 1 0 8 3a6 6 0 0 0 0 12zm0 1A7 7 0 1 0 8 2a7 7 0 0 0 0 14z"/>
+  <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.053.224l-1.5 3a.5.5 0 1 1-.894-.448L7.5 8.882V5a.5.5 0 0 1 .5-.5z"/>
+  <path d="M.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"/>
+  <path fill-rule="evenodd" d="M11.646 14.146a.5.5 0 0 1 .708 0l1 1a.5.5 0 0 1-.708.708l-1-1a.5.5 0 0 1 0-.708zm-7.292 0a.5.5 0 0 0-.708 0l-1 1a.5.5 0 0 0 .708.708l1-1a.5.5 0 0 0 0-.708zM5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+  <path d="M7 1h2v2H7V1z"/>
+</svg>
+                  {{/if}}
+                {{/if}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                UVC1 blister
+              </th>
+              <td>
+                <StatusIcon @size="2em" @isOk={{this.isUVC1BlisterOk}} />
+                <span class="text">{{this.state.UVC1BlisterNbHour}} hr</span>
+                <button type="button"  class="btn btn-primary btn-sm float-right" {{on "click" (fn this.changeBlister "UVC1")}} >UVC1 renewed</button>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                UVC2 blister
+              </th>
+              <td>
+                <StatusIcon @size="2em" @isOk={{this.isUVC2BlisterOk}} />
+                <span class="text">{{this.state.UVC2BlisterNbHour}} hr</span>
+                <button type="button"  class="btn btn-primary btn-sm float-right" {{on "click" (fn this.changeBlister "UVC2")}} >UVC2 renewed</button>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Ozone blister
+              </th>
+              <td>
+                <StatusIcon @size="2em" @isOk={{this.isOzoneBlisterOk}} /> 
+                <span class="text">{{this.state.ozoneBlisterNbHour}} hr</span>
+                <button type="button"  class="btn btn-primary btn-sm float-right" {{on "click" (fn this.changeBlister "ozone")}} >Ozone renewed</button>
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+              {{#if this.error}}
+                <p class="text-danger">{{this.error}}</p>
+              {{/if}}
+            </tfoot>
+          </table>
+        </p>
+      </div>
+    </div>
+</div>

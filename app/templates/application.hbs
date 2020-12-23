@@ -21,10 +21,7 @@
     </div>
     <div class="row">
       <div class="col-sm">
-        <span>
-          Status:
-          <StatusIcon @size="1.5em" @isOk={{true}} />
-        </span>
+        <BoardState @boards={{this.boards}} />
       </div>
       <div class="col-sm text-right">
         <span>
@@ -81,7 +78,7 @@
             <button
               type="button"
               class="btn btn-outline-light btn-dark text-center nav-link active"
-              {{on "click" (fn this.toRoute "pond")}}
+              {{on "click" (fn this.toRoute "tfp")}}
             >
               <svg
                 class="bi bi-pentagon"
@@ -98,7 +95,7 @@
                 ></path>
               </svg>
               <br />
-              Pond
+              TFP
             </button>
           </li>
           <li class="nav-item">

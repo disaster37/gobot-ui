@@ -1,0 +1,52 @@
+<div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">
+        Tank Control
+      </h5>
+      <div class="card-body">
+        <p>
+          <table class="table">
+            <tbody>
+            <tr>
+              <th>
+                Auto
+              </th>
+              <td>
+                <ButtonOnOff @isOn={{true}} />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Tank 1 level
+              </th>
+              <td>
+                {{this.tank.level}} cm
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Tank 1 watter
+              </th>
+              <td>
+                {{this.tank.volume}} l
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Tank 1 percent
+              </th>
+              <td>
+                {{this.tank.percent}} %
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+              {{#if this.tfpError}}
+                <p class="text-danger">{{this.dfpError}}</p>
+              {{/if}}
+            </tfoot>
+          </table>
+        </p>
+      </div>
+    </div>
+</div>

@@ -7,9 +7,6 @@ export default class TfpstateModel extends Model {
   @attr('boolean') waterfallPumpRunning;
   @attr('boolean') pondBubbleRunning;
   @attr('boolean') filterBubbleRunning;
-  @attr('date') UVC1BlisterTime;
-  @attr('date') UVC2BlisterTime;
-  @attr('date') ozoneBlisterTime;
   @attr('number') UVC1BlisterNbHour;
   @attr('number') UVC2BlisterNbHour;
   @attr('number') ozoneBlisterNbHour;

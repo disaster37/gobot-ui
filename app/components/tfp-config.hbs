@@ -1,6 +1,83 @@
-<ul>
-  <li>
-    Pond Pump Running:
-    {{config.pondPumpRunning}}
-  </li>
-</ul>
+<div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">
+        TFP config
+        <button type="button"  class="btn btn-dark btn-sm float-right" {{on "click" (fn this.editForm)}} >Edit</button>
+      </h5>
+      <div class="card-body">
+        <p>
+            <form >
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC1BlisterMaxTime" class="col-sm col-form-label">UVC1 Blister max time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.UVC1BlisterMaxTime" class="form-control" @type="text" @value={{this.config.UVC1BlisterMaxTime}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC2BlisterMaxTime" class="col-sm col-form-label">UVC2 Blister max time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.UVC2BlisterMaxTime" class="form-control" @type="text" @value={{this.config.UVC2BlisterMaxTime}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.ozoneBlisterMaxTime" class="col-sm col-form-label">Ozone Blister max time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.ozoneBlisterMaxTime" class="form-control" @type="text" @value={{this.config.ozoneBlisterMaxTime}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.mode" class="col-sm col-form-label">Mode</label>
+                    <div class="col-sm">
+                        <PowerSelect @disabled={{this.formIsNotEdited}} @selected={{this.config.mode}} @options={{this.modes}} @onChange={{this.modeChange}} as |name|>
+                            {{name}}
+                        </PowerSelect>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC1BlisterTime" class="col-sm col-form-label">UVC1 Blister time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.UVC1BlisterTime" class="form-control" @type="string" @value={{this.UVC1BlisterTime}} />
+                        <small id="tfpConfig.UVC1BlisterTimeHelper" class="form-text text-muted">Date when blister has been changed (just user info)</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.UVC2BlisterTime" class="col-sm col-form-label">UVC2 Blister time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.UVC2BlisterTime" class="form-control" @type="string" @value={{this.UVC2BlisterTime}} />
+                        <small id="tfpConfig.UVC2BlisterTimeHelper" class="form-text text-muted">Date when blister has been changed (just user info)</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.ozoneBlisterTime" class="col-sm col-form-label">Ozone Blister time</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.ozoneBlisterTime" class="form-control" @type="string" @value={{this.ozoneBlisterTime}} />
+                        <small id="tfpConfig.OzoneBlisterTimeHelper" class="form-text text-muted">Date when blister has been changed (just user info)</small>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <Input disabled={{this.formIsNotEdited}} id="tfpConfig.isWaterfallAuto" class="form-check-input" @type="checkbox" @checked={{this.config.isWaterfallAuto}}  />
+                    <label for="tfpConfig.isWaterfallAuto" class="form-check-label">Waterfall auto</label>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.startTimeWaterfall" class="col-sm col-form-label">Start time waterfall</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.startTimeWaterfall" class="form-control" @type="string" @value={{this.config.startTimeWaterfall}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tfpConfig.stopTimeWaterfall" class="col-sm col-form-label">Stop time waterfall</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tfpConfig.stopTimeWaterfall" class="form-control" @type="string" @value={{this.config.stopTimeWaterfall}} />
+                    </div>
+                </div>
+                {{#unless this.formIsNotEdited}}
+                <button type="submit" class="btn btn-primary" {{on "click" (fn this.save)}} >Save</button>
+                {{/unless}}
+            </form>
+            {{#each this.config.errors as |error|}}
+              <div class="text-danger">{{error.message}}</div>
+            {{/each}}
+        </p>
+      </div>
+    </div>
+</div>

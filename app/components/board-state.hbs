@@ -1,0 +1,5 @@
+<span>
+    {{#each this.boards as |board|}}
+        {{uppercase board.name}}: <StatusIcon @size="1.5em" @isOk={{board.isOnline}} /> &nbsp; | &nbsp;
+    {{/each}}
+</span>

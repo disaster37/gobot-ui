@@ -1,0 +1,62 @@
+<div class="col-sm">
+    <div class="card">
+      <h5 class="card-header">
+        DFP config
+        <button type="button"  class="btn btn-dark btn-sm float-right" {{on "click" (fn this.editForm)}} >Edit</button>
+      </h5>
+      <div class="card-body">
+        <p>
+            <form >
+                <div class="form-group row">
+                    <label for="dfpConfig.forceWashingDuration" class="col-sm col-form-label">Force washing</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.forceWashingDuration" class="form-control" @type="text" @value={{this.config.forceWashingDuration}} />
+                        <small id="dfpConfig.forceWashingDurationHelp" class="form-text text-muted">Force washing from N last washing time in seconds</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dfpConfig.forceWashingDurationWhenFrozen" class="col-sm col-form-label">Force Washing (Frozen)</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.forceWashingDurationWhenFrozen" class="form-control" @type="text" @value={{this.config.forceWashingDurationWhenFrozen}} />
+                        <small id="dfpConfig.forceWashingDurationWhenFrozenHelp" class="form-text text-muted">Force washing from N last washing time in seconds when frozen</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dfpConfig.temperatureThresholdWhenFrozen" class="col-sm col-form-label">Frozen temperature threshold</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.temperatureThresholdWhenFrozen" class="form-control" @type="text" @value={{this.config.temperatureThresholdWhenFrozen}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dfpConfig.waitTimeBetweenWashing" class="col-sm col-form-label">Wait time between washing</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.waitTimeBetweenWashing" class="form-control" @type="string" @value={{this.config.waitTimeBetweenWashing}} />
+                        <small id="dfpConfig.waitTimeBetweenWashing" class="form-text text-muted">Wait N time in seconds from last washing before can start again</small>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dfpConfig.washingDuration" class="col-sm col-form-label">Washing duration</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.washingDuration" class="form-control" @type="string" @value={{this.config.washingDuration}} />
+                        <small id="dfpConfig.washingDuration" class="form-text text-muted">Washing duration in seconds</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dfpConfig.startWashingPumpBeforeWashing" class="col-sm col-form-label">Start Washing pump before drum</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.startWashingPumpBeforeWashing" class="form-control" @type="string" @value={{this.config.startWashingPumpBeforeWashing}} />
+                        <small id="dfpConfig.startWashingPumpBeforeWashing" class="form-text text-muted">Start whashing pump before drum in seconds</small>
+                    </div>
+                </div>
+                {{#unless this.formIsNotEdited}}
+                <button type="submit" class="btn btn-primary" {{on "click" (fn this.save)}} >Save</button>
+                {{/unless}}
+            </form>
+            {{#each this.config.errors as |error|}}
+              <div class="text-danger">{{error.message}}</div>
+            {{/each}}          
+        </p>
+      </div>
+    </div>
+</div>

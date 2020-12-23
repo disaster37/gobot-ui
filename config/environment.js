@@ -39,6 +39,10 @@ module.exports = function (environment) {
     refreshLeeway: 300 // refresh 5 minutes (300 seconds) before expiration
   };
 
+  ENV['ember-websockets'] = {
+    socketIO: true
+  }
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;

@@ -11,4 +11,6 @@ Router.map(function () {
   this.route('home');
   this.route('login');
   this.route('config');
+  this.route('tfp');
+  this.route('dfp');
 });

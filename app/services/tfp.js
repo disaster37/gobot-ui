@@ -20,6 +20,9 @@ export default class TfpService extends Service {
       case "stopFilterBubble": return this.stopFilterBubble(); break;
       case "startWaterfallPump": return this.startWaterfallPump(); break;
       case "stopWaterfallPump": return this.stopWaterfallPump(); break;
+      case "changeUVC1Blister": return this.changeUVC1Blister(); break;
+      case "changeUVC2Blister": return this.changeUVC2Blister(); break;
+      case "changeOzoneBlister": return this.changeOzoneBlister(); break;
     };
   }
 
@@ -69,6 +72,18 @@ export default class TfpService extends Service {
 
   stopFilterBubble() {
     return this.client.post(this.baseUrl + '/action/stop_filter_bubble', { dataType: "text" });
+  }
+
+  changeUVC1Blister() {
+    return this.client.post(this.baseUrl + '/action/change_uvc1_blister', { dataType: "text" });
+  }
+
+  changeUVC2Blister() {
+    return this.client.post(this.baseUrl + '/action/change_uvc2_blister', { dataType: "text" });
+  }
+
+  changeOzoneBlister() {
+    return this.client.post(this.baseUrl + '/action/change_ozone_blister', { dataType: "text" });
   }
 
 }

@@ -17,6 +17,8 @@ export default class Application extends Route {
 
   setupController(controller, model) {
     this._super(controller, model);
-    controller.set('boards', model.boards);
+    if(this.sessionManager.isAuthenticated) {
+      controller.set('boards', model.boards);
+    }
   }
 }

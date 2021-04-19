@@ -49,6 +49,20 @@
                         <small id="dfpConfig.startWashingPumpBeforeWashing" class="form-text text-muted">Start whashing pump before drum in seconds</small>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="dfpConfig.waitTimeBeforeUnsetSecurity" class="col-sm col-form-label">Wait time before unset security</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.waitTimeBeforeUnsetSecurity" class="form-control" @type="string" @value={{this.config.waitTimeBeforeUnsetSecurity}} />
+                        <small id="dfpConfig.waitTimeBeforeUnsetSecurity" class="form-text text-muted">Wait time in seconds</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dfpConfig.temperatureSensorPolling" class="col-sm col-form-label">Polling time to read temperature sensor</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="dfpConfig.temperatureSensorPolling" class="form-control" @type="string" @value={{this.config.temperatureSensorPolling}} />
+                        <small id="dfpConfig.temperatureSensorPolling" class="form-text text-muted">Polling time in seconds</small>
+                    </div>
+                </div>
                 {{#unless this.formIsNotEdited}}
                 <button type="submit" class="btn btn-primary" {{on "click" (fn this.save)}} >Save</button>
                 {{/unless}}

@@ -31,6 +31,8 @@ export default class DfpConfigComponent extends Component {
             waitTimeBetweenWashing: this.config.waitTimeBetweenWashing,
             washingDuration: this.config.washingDuration,
             startWashingPumpBeforeWashing: this.config.startWashingPumpBeforeWashing,
+            waitTimeBeforeUnsetSecurity: this.config.waitTimeBeforeUnsetSecurity,
+            temperatureSensorPolling: this.config.temperatureSensorPolling,
             version: this.config.version,
         };
         

@@ -1,11 +1,49 @@
 <div class="col-sm">
     <div class="card">
-      <h5 class="card-header">
-        Tank config
-      </h5>
-      <div class="card-body">
-        <p>
-        </p>
-      </div>
+        <h5 class="card-header">
+            {{this.name}} config
+            <button type="button" class="btn btn-dark btn-sm float-right"
+                {{on "click" (fn this.editForm)}}>Edit</button>
+        </h5>
+        <div class="card-body">
+            <p>
+            <form>
+                <div class="form-group row">
+                    <label for="tankConfig.name" class="col-sm col-form-label">Name</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tankConfig.name" class="form-control" @type="text"
+                            @value={{this.config.name}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tankConfig.depth" class="col-sm col-form-label">Depth (cm)</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tankConfig.Depth" class="form-control" @type="text"
+                            @value={{this.config.depth}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tankConfig.sensorHeight" class="col-sm col-form-label">Sensor Height (cm)</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tankConfig.sensorHeight" class="form-control"
+                            @type="text" @value={{this.config.sensorHeight}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tankConfig.literPerCm" class="col-sm col-form-label">Liter per cm</label>
+                    <div class="col-sm">
+                        <Input readonly={{this.formIsNotEdited}} id="tankConfig.literPerCm" class="form-control"
+                            @type="text" @value={{this.config.literPerCm}} />
+                    </div>
+                </div>
+                {{#unless this.formIsNotEdited}}
+                <button type="submit" class="btn btn-primary" {{on "click" (fn this.save)}}>Save</button>
+                {{/unless}}
+            </form>
+            {{#each this.config.errors as |error|}}
+            <div class="text-danger">{{error.message}}</div>
+            {{/each}}
+            </p>
+        </div>
     </div>
 </div>

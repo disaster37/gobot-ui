@@ -8,6 +8,7 @@ export default class ConfigRoute extends Route.extend(AuthenticatedRouteMixin) {
     return hash({
       tfpConfig: this.store.findAll('tfp-config'),
       dfpConfig: this.store.findAll('dfp-config'),
+      tankConfig: this.store.findAll('tank-config'),
     });
     
   }
@@ -16,6 +17,6 @@ export default class ConfigRoute extends Route.extend(AuthenticatedRouteMixin) {
     this._super(controller, model);
     controller.set('tfpConfig', model.tfpConfig.firstObject);
     controller.set('dfpConfig', model.dfpConfig.firstObject);
-
+    controller.set('tankConfigs', model.tankConfig);
   }
 }

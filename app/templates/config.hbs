@@ -1,6 +1,7 @@
 <div class="row">
-  <DfpConfig @config={{this.dfpConfig}} />
-  <TfpConfig @config={{this.tfpConfig}} />
-  <TankConfig />
-  
+    <DfpConfig @config={{this.dfpConfig}} />
+    <TfpConfig @config={{this.tfpConfig}} />
+    {{#each this.tankConfigs as |tankConfig|}}
+    <TankConfig @config={{tankConfig}} />
+    {{/each}}
 </div>

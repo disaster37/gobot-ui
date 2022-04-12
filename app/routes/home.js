@@ -8,11 +8,11 @@ export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
   model = function (params) {
     var tfpState = this.store.findAll('tfp-state', { reload: true });
     var tfpConfig = this.store.findAll('tfp-config', {reload: true});
-    var tank = this.store.findAll('tank', {reload: true});
+    var tankState = this.store.findAll('tank', {reload: true});
     return hash({
       tfpState: tfpState,
       tfpConfig: tfpConfig,
-      tank: tank
+      tankState: tank
     });
     
   }
@@ -21,7 +21,7 @@ export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
     this._super(controller, model);
     controller.set('tfpState', model.tfpState.firstObject);
     controller.set('tfpConfig', model.tfpConfig.firstObject);
-    controller.set('tank', model.tank.firstObject);
+    controller.set('tank', model.tank);
   }
 
   @action

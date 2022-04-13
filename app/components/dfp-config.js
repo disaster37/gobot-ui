@@ -24,23 +24,9 @@ export default class DfpConfigComponent extends Component {
     async save(event) {
         event.preventDefault();
         
-        const data = {
-            forceWashingDuration: this.config.forceWashingDuration,
-            forceWashingDurationWhenFrozen: this.config.forceWashingDurationWhenFrozen,
-            temperatureThresholdWhenFrozen: this.config.temperatureThresholdWhenFrozen,
-            waitTimeBetweenWashing: this.config.waitTimeBetweenWashing,
-            washingDuration: this.config.washingDuration,
-            startWashingPumpBeforeWashing: this.config.startWashingPumpBeforeWashing,
-            waitTimeBeforeUnsetSecurity: this.config.waitTimeBeforeUnsetSecurity,
-            temperatureSensorPolling: this.config.temperatureSensorPolling,
-            version: this.config.version,
-        };
-        
-        console.log(data);
+        console.log(this.config);
 
-        
-        const tfpConfig = this.store.createRecord('dfp-config', data);
-        await tfpConfig.save().then(() => {
+        await this.config.save().then(() => {
             this.formIsNotEdited = true;
         });
     }

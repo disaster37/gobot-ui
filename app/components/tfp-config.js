@@ -40,26 +40,14 @@ export default class configComponent extends Component {
     @action
     async save(event) {
         event.preventDefault();
-        
-        const data = {
-            UVC1BlisterMaxTime: this.config.UVC1BlisterMaxTime,
-            UVC2BlisterMaxTime: this.config.UVC2BlisterMaxTime,
-            ozoneBlisterMaxTime: this.config.ozoneBlisterMaxTime,
-            mode: this.config.mode,
-            UVC1BlisterTime: moment(this.UVC1BlisterTime, 'DD/MM/YYYY').toDate(),
-            UVC2BlisterTime: moment(this.UVC2BlisterTime, 'DD/MM/YYYY').toDate(),
-            ozoneBlisterTime: moment(this.ozoneBlisterTime, 'DD/MM/YYYY').toDate(),
-            isWaterfallAuto: this.config.isWaterfallAuto,
-            startTimeWaterfall: this.config.startTimeWaterfall,
-            stopTimeWaterfall: this.config.stopTimeWaterfall,
-            version: this.config.version,
-        };
-        
-        console.log(data);
 
+        this.config.UVC1BlisterTime = moment(this.UVC1BlisterTime, 'DD/MM/YYYY').toDate();
+        this.config.UVC2BlisterTime = moment(this.UVC2BlisterTime, 'DD/MM/YYYY').toDate();
+        this.config.ozoneBlisterTime = moment(this.ozoneBlisterTime, 'DD/MM/YYYY').toDate();
         
-        const config = this.store.createRecord('tfp-config', data);
-        await config.save().then(() => {
+        console.log(this.config);
+
+        await this.config.save().then(() => {
             this.formIsNotEdited = true;
         });
     }

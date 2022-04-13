@@ -5,7 +5,7 @@ export default class TankConfigModel extends Model {
     @attr('date') createdAt;
     @attr('number') version;
     @attr('boolean') enable;
-    @attr('name') name;
+    @attr('string') name;
     @attr('number') depth;
     @attr('number') sensorHeight;
     @attr('number') literPerCm;

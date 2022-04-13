@@ -1,4 +1,7 @@
 import Component from '@glimmer/component';
+import { action } from '@ember/object';
+import { tracked } from "@glimmer/tracking";
+import { inject as service } from '@ember/service';
 
 export default class TankConfigComponent extends Component {
     @service store;
@@ -20,20 +23,9 @@ export default class TankConfigComponent extends Component {
     async save(event) {
         event.preventDefault();
         
-        const data = {
-            version: this.config.version,
-            enable: this.config.enable,
-            name: this.config.name,
-            depth: this.config.depth,
-            sensorHeight: this.config.sensorHeight,
-            literPerCm: this.config.literPerCm,
-        };
-        
-        console.log(data);
+        console.log(this.config);
 
-        
-        const config = this.store.createRecord('tank-config', data);
-        await config.save().then(() => {
+        await this.config.save().then(() => {
             this.formIsNotEdited = true;
         });
     }

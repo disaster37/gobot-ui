@@ -1,52 +1,41 @@
 <div class="col-sm">
     <div class="card">
-      <h5 class="card-header">
-        Tank Control
-      </h5>
-      <div class="card-body">
-        <p>
-          <table class="table">
-            <tbody>
-            <tr>
-              <th>
-                Auto
-              </th>
-              <td>
-                <ButtonOnOff @isOn={{true}} />
-              </td>
-            </tr>
-            <tr>
-              <th>
-                Tank 1 level
-              </th>
-              <td>
-                {{this.tank.level}} cm
-              </td>
-            </tr>
-            <tr>
-              <th>
-                Tank 1 watter
-              </th>
-              <td>
-                {{this.tank.volume}} l
-              </td>
-            </tr>
-            <tr>
-              <th>
-                Tank 1 percent
-              </th>
-              <td>
-                {{this.tank.percent}} %
-              </td>
-            </tr>
-            </tbody>
-            <tfoot>
-              {{#if this.tfpError}}
-                <p class="text-danger">{{this.dfpError}}</p>
-              {{/if}}
-            </tfoot>
-          </table>
-        </p>
-      </div>
+        <h5 class="card-header">
+            {{this.state.id}} state
+        </h5>
+        <div class="card-body">
+            <p>
+            <form>
+                <div class="form-group row">
+                    <label for="tank.level" class="col-sm col-form-label">Level</label>
+                    <div class="col-sm">
+                        <Input readonly=true id="tank.level" class="form-control" @type="text"
+                            @value={{this.state.level}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tank.volume" class="col-sm col-form-label">Volume</label>
+                    <div class="col-sm">
+                        <Input readonly=true id="tank.volume" class="form-control" @type="text"
+                            @value={{this.state.volume}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tank.percent" class="col-sm col-form-label">Percent</label>
+                    <div class="col-sm">
+                        <Input readonly=true id="tank.percent" class="form-control"
+                            @type="text" @value={{this.state.percent}} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tank.distance" class="col-sm col-form-label">Distance</label>
+                    <div class="col-sm">
+                        <Input readonly=true id="tank.distance" class="form-control"
+                            @type="text" @value={{this.state.distance}} />
+                    </div>
+                </div>
+            </form>
+            </p>
+        </div>
     </div>
 </div>

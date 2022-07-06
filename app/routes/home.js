@@ -21,7 +21,7 @@ export default class HomeRoute extends Route.extend(AuthenticatedRouteMixin) {
     this._super(controller, model);
     controller.set('tfpState', model.tfpState.firstObject);
     controller.set('tfpConfig', model.tfpConfig.firstObject);
-    controller.set('tank', model.tank.firstObject);
+    controller.set('tankStates', model.tank);
   }
 
   @action

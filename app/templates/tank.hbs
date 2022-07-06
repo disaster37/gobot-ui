@@ -1,0 +1,10 @@
+<div class="row">
+    
+    {{#each this.tankConfigs as |tankConfig|}}
+    <TankConfig @config={{tankConfig}} />
+    {{/each}}
+
+    {{#each this.tankStates as |tankState|}}
+    <TankAction @state={{tankState}} />
+    {{/each}}
+</div>

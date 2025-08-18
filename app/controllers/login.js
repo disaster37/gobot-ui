@@ -1,32 +1,51 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { tracked } from "@glimmer/tracking";
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 
 export default class LoginController extends Controller {
-  @service('session') sessionManager;
-
+  @service session;
+  @service router;
+  
   @tracked errorMessage;
 
   @action
-  async authenticate() {
-    const credentials = this.getProperties('username', 'password');
-    const authenticator = 'authenticator:jwt'; // or 'authenticator:jwt'
-
-    try {
-      await this.sessionManager.authenticate(authenticator, credentials);
-    } catch(error) {
-      if (error.status == 401) {
-        this.errorMessage = "Login failed"
-      } else {
-        this.errorMessage = error.json.message;
+  async authenticate(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const credentials = { username: this.username, password: this.password };
+    const authenticator = 'authenticator:jwt'; // or 'authenticator:token'
+    this.session.authenticate(authenticator, credentials).catch(err => {
+      if (err.status === 401) {
+        alert('Incorrect username or password');
+        return;
       }
-    }
-
-    if(this.sessionManager.isAuthenticated) {
-      this.transitionToRoute("/home");
-    }
-    
+      let errorMessage = '';
+      if (err.text) {
+        try {
+          if (this.isJsonResponse(err.text)) {
+            errorMessage = JSON.parse(err.text).errors[0].message;
+          } else {
+            errorMessage = err.text;
+          }
+        } catch(er) {
+          alert('An unexpected error occurred. ' + er.toString());
+        }
+      } else {
+        errorMessage = err;
+      }
+      alert(errorMessage);
+    });
   }
-  
+
+  isJsonResponse(response) {
+    if (typeof response !== 'string') return false;
+    try {
+      const result = JSON.parse(response);
+      const type = Object.prototype.toString.call(result);
+      return type === '[object Object]' || type === '[object Array]';
+    } catch (err) {
+      return false;
+    }
+  }
 }

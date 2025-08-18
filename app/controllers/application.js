@@ -1,23 +1,25 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class ApplicationController extends Controller {
+    
     @service session;
+    @service router;
 
     @action
     toRoute(routeName){
-        this.transitionToRoute(routeName);
+        this.router.transitionTo(routeName);
     }
 
     @action
     logout(){
         this.session.invalidate();
-        this.transitionToRoute("/")
+        this.router.transitionTo("/")
     }
 
     @action
     login(){
-        this.transitionToRoute("/login")
+        this.router.transitionTo("/login")
     }
 }

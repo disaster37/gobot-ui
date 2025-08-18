@@ -3,7 +3,7 @@
         <h5 class="card-header">
             {{this.config.name}} config
             <button type="button" class="btn btn-dark btn-sm float-right"
-                {{on "click" (fn this.editForm)}}>Edit</button>
+                {{on "click" this.editForm}}>Edit</button>
         </h5>
         <div class="card-body">
             <p>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 {{#unless this.formIsNotEdited}}
-                <button type="submit" class="btn btn-primary" {{on "click" (fn this.save)}}>Save</button>
+                <button type="submit" class="btn btn-primary" {{on "click" this.save}}>Save</button>
                 {{/unless}}
             </form>
             {{#each this.config.errors as |error|}}

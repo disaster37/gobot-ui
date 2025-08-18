@@ -1,10 +1,10 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Service from '@ember/service';
 
 export default class TfpService extends Service {
   baseUrl = '/tfps';
 
-  @service('ajax-app') client;
+  @service('fetch') client;
 
   call(name) {
     switch(name) {
@@ -27,7 +27,7 @@ export default class TfpService extends Service {
   }
 
   startWaterfallPump() {
-    return this.client.post(this.baseUrl + '/action/start_waterfall_pump', { dataType: "text" });
+    return this.client.post(this.baseUrl + '/action/start_waterfall_pump', { dataType: "text", contentType: "text" });
   }
 
   stopWaterfallPump() {
@@ -35,11 +35,11 @@ export default class TfpService extends Service {
   }
 
   startPondPump() {
-    return this.client.post(this.baseUrl + '/action/start_pond_pump', { dataType: "text" });
+    return this.client.post(this.baseUrl + '/action/start_pond_pump', { dataType: "json" });
   }
 
   stopPondPump() {
-    return this.client.post(this.baseUrl + '/action/stop_pond_pump', { dataType: "text" });
+    return this.client.post(this.baseUrl + '/action/stop_pond_pump', { dataType: "text/xml" });
   }
 
   startUVC1() {

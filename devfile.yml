@@ -13,8 +13,11 @@ components:
         - name: DOCKER_HOST
           value: tcp://localhost:2375
       endpoints:
-        - name: web
+        - name: api
           targetPort: 8080
+          exposure: public
+        - name: ui
+          targetPort: 4200
           exposure: public
       memoryLimit: 4Gi
       cpuLimit: 4000m

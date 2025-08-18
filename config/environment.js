@@ -1,20 +1,17 @@
 'use strict';
 
 module.exports = function (environment) {
-  let ENV = {
+  const ENV = {
     modulePrefix: 'dfp-ui',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'history',
     EmberENV: {
+      EXTEND_PROTOTYPES: false,
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
     },
 
     APP: {
@@ -22,15 +19,12 @@ module.exports = function (environment) {
       // when it is created
       Namespace: 'backend/api',
     },
-
-
-
   };
 
-  ENV['ember-cli-mirage'] = {
-    enabled: false // off everywhere but demo
+  ENV['ember-simple-auth'] = {
+    routeAfterAuthentication: 'authenticated.home',
+    routeAfterInvalidation: 'login',
   };
-
   ENV['ember-simple-auth-token'] = {
     authorizationHeaderName: 'Authorization', // Header name added to each API request
     authorizationPrefix: 'Bearer ', // Prefix added to each API request
@@ -49,6 +43,7 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
   }
 
   if (environment === 'test') {

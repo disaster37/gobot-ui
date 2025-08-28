@@ -2,14 +2,14 @@
   <button
     type="button"
     class="btn btn-secondary {{if this.isOn "btn-success active" "disabled"}}"
-    {{on "click" (fn this.change true)}}
+    {{on "click" (fn this.change false)}}
   >
     On
   </button>
   <button
     type="button"
     class="btn btn-secondary {{unless this.isOn "btn-danger active" "disabled"}}"
-    {{on "click" (fn this.change false)}}
+    {{on "click" (fn this.change true)}}
   >
     Off
   </button>

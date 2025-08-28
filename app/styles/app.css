@@ -5,14 +5,14 @@
 
 .dfp-footer {
   margin-top: 50px;
-  bottom: 0px;
+  bottom: 0;
   background-color: lightblue;
   padding: 10px;
   text-align: center;
 }
 
 .dfp-put-right {
-  right: 0px;
+  right: 0;
 }
 
 .dfp-badge-icon {

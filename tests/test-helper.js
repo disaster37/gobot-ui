@@ -1,8 +1,14 @@
 import Application from 'dfp-ui/app';
 import config from 'dfp-ui/config/environment';
+import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
-import { start } from 'ember-qunit';
+import { setup } from 'qunit-dom';
+import { loadTests } from 'ember-qunit/test-loader';
+import { start, setupEmberOnerrorValidation } from 'ember-qunit';
 
 setApplication(Application.create(config.APP));
 
+setup(QUnit.assert);
+setupEmberOnerrorValidation();
+loadTests();
 start();

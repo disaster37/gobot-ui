@@ -7,11 +7,13 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  //this.route('tfp-config');
-  this.route('home');
   this.route('login');
-  this.route('config');
-  this.route('tfp');
-  this.route('dfp');
-  this.route('tank');
+  this.route('authenticated', { path: '' }, function() {
+    // all routes that require the session to be authenticated
+    this.route('home', { path: '' });
+    this.route('config');
+    this.route('tfp');
+    this.route('dfp');
+    this.route('tank');
+  });
 });

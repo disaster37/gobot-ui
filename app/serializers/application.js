@@ -6,8 +6,10 @@ export default class ApplicationSerializer extends JSONAPISerializer {
     return decamelize(key);
   }
 
+  /*
   attrs = {
     createdAt: 'CreatedAt',
     updatedAt: 'UpdatedAt'
   }
+    */
 }

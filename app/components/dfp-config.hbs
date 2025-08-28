@@ -2,11 +2,11 @@
     <div class="card">
       <h5 class="card-header">
         DFP config
-        <button type="button"  class="btn btn-dark btn-sm float-right" {{on "click" (fn this.editForm)}} >Edit</button>
+        <button type="button"  class="btn btn-dark btn-sm float-right" {{on "click" this.editForm}} >Edit</button>
       </h5>
       <div class="card-body">
         <p>
-            <form >
+            <form>
                 <div class="form-group row">
                     <label for="dfpConfig.forceWashingDuration" class="col-sm col-form-label">Force washing</label>
                     <div class="col-sm">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 {{#unless this.formIsNotEdited}}
-                <button type="submit" class="btn btn-primary" {{on "click" (fn this.save)}} >Save</button>
+                <button type="submit" class="btn btn-primary" {{on "click" this.save}} >Save</button>
                 {{/unless}}
             </form>
             {{#each this.config.errors as |error|}}

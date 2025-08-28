@@ -1,23 +1,30 @@
-import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { inject } from '@ember/service';
+import { hash } from 'rsvp';
+import { service } from '@ember/service';
 
-export default class Application extends Route {
+export default class ApplicationRoute extends Route {
+  @inject session;
+  @service store;
+  @service router;
 
-  @service('session') sessionManager;
+  async beforeModel() {
+    await this.session.setup();
+  }
 
-  model = function (params) {
-    if(this.sessionManager.isAuthenticated) {
+  model(params) { 
+    if(this.session.isAuthenticated) {
       console.log("Read model form application route");
       return hash({
         boards: this.store.findAll('board'),
       });
     }
   }
-
+  
   setupController(controller, model) {
-    this._super(controller, model);
-    if(this.sessionManager.isAuthenticated) {
+    console.log("Set controller form application route");
+    super.setupController(controller, model);
+    if(this.session.isAuthenticated) {
       controller.set('boards', model.boards);
     }
   }

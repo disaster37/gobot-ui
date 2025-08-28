@@ -14,6 +14,8 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
+Ember: 6.4.0
+
 > If package issue, create local file on root project `.npmrc` with value `legacy-peer-deps=true`
 
 - `git clone <repository-url>` this repository

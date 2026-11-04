@@ -28,10 +28,27 @@ export function useRealtimeRefresh(options: RealtimeOptions): RealtimeController
   const isPolling = ref(false)
   const lastUpdatedAt = ref<Date | null>(null)
   let timer: ReturnType<typeof setInterval> | null = null
+  let inFlight = false
 
   async function refreshNow(): Promise<void> {
-    await options.onRefresh()
-    lastUpdatedAt.value = new Date()
+    // Guard against overlapping refreshes: a slow onRefresh() (>intervalMs) must
+    // not stack behind the next interval tick. The flag is released on both
+    // success and failure so a single rejection never wedges polling.
+    if (inFlight) return
+    inFlight = true
+    try {
+      await options.onRefresh()
+      lastUpdatedAt.value = new Date()
+    } finally {
+      inFlight = false
+    }
+  }
+
+  // Used for the mount load and polling ticks: errors are surfaced to direct
+  // callers of refreshNow(), while fire-and-forget callers must not produce
+  // unhandled rejections.
+  function fireAndForgetRefresh(): void {
+    void refreshNow().catch(() => {})
   }
 
   function start(): void {
@@ -39,7 +56,7 @@ export function useRealtimeRefresh(options: RealtimeOptions): RealtimeController
     isPolling.value = true
     timer = setInterval(() => {
       if (typeof document !== 'undefined' && document.visibilityState === 'hidden') return
-      void refreshNow()
+      fireAndForgetRefresh()
     }, intervalMs)
   }
 
@@ -59,7 +76,7 @@ export function useRealtimeRefresh(options: RealtimeOptions): RealtimeController
   }
 
   onMounted(() => {
-    void refreshNow()
+    fireAndForgetRefresh()
     if (import.meta.env?.MODE !== 'test') start()
   })
 

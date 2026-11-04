@@ -86,4 +86,26 @@ describe('tanks store', () => {
     await expect(store.saveConfig(configs[0]!)).rejects.toThrow('save failed')
     expect(store.error).toBe('save failed')
   })
+
+  it('surfaces a config failure while still loading states', async () => {
+    api.getCollection.mockImplementation((path: string) =>
+      path === '/tanks' ? Promise.resolve(states) : Promise.reject(new Error('configs down'))
+    )
+    const store = useTankStore()
+    await store.fetchAll()
+    expect(store.error).toBe('configs down')
+    expect(store.states).toHaveLength(2)
+    expect(store.loading).toBe(false)
+  })
+
+  it('surfaces a state failure while still loading configs', async () => {
+    api.getCollection.mockImplementation((path: string) =>
+      path === '/tanks' ? Promise.reject(new Error('states down')) : Promise.resolve(configs)
+    )
+    const store = useTankStore()
+    await store.fetchAll()
+    expect(store.error).toBe('states down')
+    expect(store.configs).toHaveLength(2)
+    expect(store.loading).toBe(false)
+  })
 })

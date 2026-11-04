@@ -28,6 +28,7 @@ function onStateSaved(state: TfpState): void {
     <TfpAction
       :config="tfpStore.config"
       :state="tfpStore.state"
+      :loading="tfpStore.loading || tfpStore.isAnyActionLoading"
       :error="tfpStore.error"
       @action="onTfpAction"
       @refresh="refreshNow"

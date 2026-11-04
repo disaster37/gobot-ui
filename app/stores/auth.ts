@@ -5,6 +5,13 @@ import { extractApiErrorMessage } from '~/composables/useApi'
 export const AUTH_TOKEN_KEY = 'dfp_auth_token'
 export const LEGACY_AUTH_TOKEN_KEY = 'ember_simple_auth-session'
 
+// Security note (tracked for a future PR): the JWT is persisted in
+// `localStorage`, which is readable by any script running on the origin. This
+// is deliberately unchanged from the previous Ember app for backend
+// compatibility. Moving to an httpOnly, Secure cookie set by the backend
+// (CWE-522 mitigation) requires backend support and is out of scope here; do
+// not weaken this further (e.g. never log the token).
+
 interface AuthState {
   token: string | null
   loading: boolean

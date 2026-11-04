@@ -12,6 +12,11 @@ interface TfpStoreState {
   error: string | null
 }
 
+interface FetchOptions {
+  /** When true, a failed sibling fetch cannot be clobbered by clearing the error at start. */
+  preserveError?: boolean
+}
+
 export const useTfpStore = defineStore('tfp', {
   state: (): TfpStoreState => ({
     config: null,
@@ -22,6 +27,7 @@ export const useTfpStore = defineStore('tfp', {
   }),
 
   getters: {
+    isAnyActionLoading: (state): boolean => Object.values(state.actionLoading).some(Boolean),
     isUVC1BlisterOk: (state): boolean =>
       state.config
         ? isBlisterOk(state.config.UVC1BlisterTime, state.config.UVC1BlisterMaxTime)
@@ -37,8 +43,8 @@ export const useTfpStore = defineStore('tfp', {
   },
 
   actions: {
-    async fetchConfig(): Promise<TfpConfig | null> {
-      this.error = null
+    async fetchConfig(options: FetchOptions = {}): Promise<TfpConfig | null> {
+      if (!options.preserveError) this.error = null
       try {
         this.config = pickSingleton(await useApi().getCollection<TfpConfig>('/tfp-configs'))
       } catch (error) {
@@ -47,8 +53,8 @@ export const useTfpStore = defineStore('tfp', {
       return this.config
     },
 
-    async fetchState(): Promise<TfpState | null> {
-      this.error = null
+    async fetchState(options: FetchOptions = {}): Promise<TfpState | null> {
+      if (!options.preserveError) this.error = null
       try {
         this.state = pickSingleton(await useApi().getCollection<TfpState>('/tfp-states'))
       } catch (error) {
@@ -59,8 +65,14 @@ export const useTfpStore = defineStore('tfp', {
 
     async fetchAll(): Promise<void> {
       this.loading = true
+      this.error = null
       try {
-        await Promise.all([this.fetchConfig(), this.fetchState()])
+        // `preserveError` keeps a failed half from being wiped by a sibling that
+        // succeeds (or vice versa); whatever succeeded is still committed.
+        await Promise.all([
+          this.fetchConfig({ preserveError: true }),
+          this.fetchState({ preserveError: true })
+        ])
       } finally {
         this.loading = false
       }

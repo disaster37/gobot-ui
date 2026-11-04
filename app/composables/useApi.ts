@@ -87,10 +87,11 @@ export function useApi(): ApiClient {
       }
       options.headers = headers
     },
-    onResponseError({ response }) {
+    async onResponseError({ response }) {
       if (response.status === 401) {
-        authStore.logout()
-        navigateTo('/login')
+        // `logout()` already clears the token and redirects to /login, so no
+        // separate navigateTo() here (avoids a redundant, unawaited navigation).
+        await authStore.logout()
       }
     }
   })

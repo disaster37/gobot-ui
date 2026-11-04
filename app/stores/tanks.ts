@@ -9,6 +9,11 @@ interface TanksStoreState {
   error: string | null
 }
 
+interface FetchOptions {
+  /** When true, a failed sibling fetch cannot be clobbered by clearing the error at start. */
+  preserveError?: boolean
+}
+
 export const useTankStore = defineStore('tanks', {
   state: (): TanksStoreState => ({
     states: [],
@@ -18,8 +23,8 @@ export const useTankStore = defineStore('tanks', {
   }),
 
   actions: {
-    async fetchStates(): Promise<TankState[]> {
-      this.error = null
+    async fetchStates(options: FetchOptions = {}): Promise<TankState[]> {
+      if (!options.preserveError) this.error = null
       try {
         this.states = await useApi().getCollection<TankState>('/tanks')
       } catch (error) {
@@ -28,8 +33,8 @@ export const useTankStore = defineStore('tanks', {
       return this.states
     },
 
-    async fetchConfigs(): Promise<TankConfig[]> {
-      this.error = null
+    async fetchConfigs(options: FetchOptions = {}): Promise<TankConfig[]> {
+      if (!options.preserveError) this.error = null
       try {
         this.configs = await useApi().getCollection<TankConfig>('/tank-configs')
       } catch (error) {
@@ -40,8 +45,12 @@ export const useTankStore = defineStore('tanks', {
 
     async fetchAll(): Promise<void> {
       this.loading = true
+      this.error = null
       try {
-        await Promise.all([this.fetchConfigs(), this.fetchStates()])
+        await Promise.all([
+          this.fetchConfigs({ preserveError: true }),
+          this.fetchStates({ preserveError: true })
+        ])
       } finally {
         this.loading = false
       }

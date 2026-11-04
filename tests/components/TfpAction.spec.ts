@@ -120,4 +120,24 @@ describe('TfpAction', () => {
     })
     expect(wrapper.text()).toContain('boom')
   })
+
+  it('disables every control while loading', () => {
+    const wrapper = mount(TfpAction, {
+      props: { config: makeConfig(), state: makeState(), loading: true }
+    })
+    for (const button of wrapper.findAll('[data-test="btn-on"], [data-test="btn-off"]')) {
+      expect(button.attributes('disabled')).toBeDefined()
+    }
+    for (const selector of ['renewed-uvc1', 'renewed-uvc2', 'renewed-ozone']) {
+      expect(wrapper.find(`[data-test="${selector}"]`).attributes('disabled')).toBeDefined()
+    }
+  })
+
+  it('keeps controls enabled when not loading', () => {
+    const wrapper = mount(TfpAction, {
+      props: { config: makeConfig(), state: makeState(), loading: false }
+    })
+    expect(wrapper.find('[data-test="btn-on"]').attributes('disabled')).toBeUndefined()
+    expect(wrapper.find('[data-test="renewed-uvc1"]').attributes('disabled')).toBeUndefined()
+  })
 })

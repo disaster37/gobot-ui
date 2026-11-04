@@ -23,10 +23,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Run Lint, Typecheck, Coverage Tests & SPA Build
-        uses: dagger/dagger-for-github@v7
+        uses: dagger/dagger-for-github@f8f5cba17a33e559ce14ba624d6b64153d1412a4 # v7.0.6
         with:
           version: 'v0.21.8'
           verb: call
@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload Coverage to Codecov (via disaster37/dagger-library-go/codecov)
         if: ${{ secrets.CODECOV_TOKEN != '' }}
-        uses: dagger/dagger-for-github@v7
+        uses: dagger/dagger-for-github@f8f5cba17a33e559ce14ba624d6b64153d1412a4 # v7.0.6
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
@@ -56,6 +56,39 @@ jobs:
           module: github.com/disaster37/dagger-library-go/codecov@e205189be6eba617e7bcc870db2e73a04171f38e
           args: upload --src=. --token=env:CODECOV_TOKEN --files=coverage/lcov.info
           cloud-token: ${{ secrets.DAGGER_CLOUD_TOKEN }}
+
+  e2e:
+    name: 'Playwright E2E (headless Chromium, mocked /backend/*)'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright E2E tests
+        run: npm run test:e2e
+        env:
+          CI: 'true'
+
+      - name: Upload Playwright report
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
 
   image-ci:
     name: 'Docker Image CI (via build-core/node & disaster37/image)'
@@ -67,10 +100,10 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Build Static Nginx SPA Container (via gitlab.com/build-core/daggerverse/node)
-        uses: dagger/dagger-for-github@v7
+        uses: dagger/dagger-for-github@f8f5cba17a33e559ce14ba624d6b64153d1412a4 # v7.0.6
         with:
           version: 'v0.21.8'
           verb: call
@@ -86,7 +119,7 @@ jobs:
           cloud-token: ${{ secrets.DAGGER_CLOUD_TOKEN }}
 
       - name: Lint Dockerfile & Build Image (via disaster37/dagger-library-go/image)
-        uses: dagger/dagger-for-github@v7
+        uses: dagger/dagger-for-github@f8f5cba17a33e559ce14ba624d6b64153d1412a4 # v7.0.6
         with:
           version: 'v0.21.8'
           verb: call

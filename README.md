@@ -60,6 +60,10 @@ npm run test:e2e       # playwright test
 - `POST /backend/token-auth` returns `{ token }` (JWT). The token is stored in `localStorage`
   under `dfp_auth_token` (legacy `ember_simple_auth-session` tokens are migrated automatically).
 - Every `/backend/api/*` request sends `Authorization: Bearer <token>`.
+- **Security tradeoff:** the JWT lives in `localStorage`, so it is readable by any script on the
+  origin. This mirrors the previous Ember app and is kept for backend compatibility; migrating to
+  an httpOnly, Secure cookie set by the backend (CWE-522) requires backend support and is tracked
+  for a future PR.
 - All API payloads use JSON:API with snake*case attributes (including the preserved
   `acknoledge_waterfall_auto` typo and the `uvc1*\*`/`bacterium_time` casings).
 - Real-time updates currently use background polling (`useRealtimeRefresh()`); the SSE seam is
@@ -70,6 +74,11 @@ npm run test:e2e       # playwright test
 The pipeline delegates 100% to pinned Daggerverse modules (`Dudesons/node`,
 `build-core/node`, `disaster37/image`, `disaster37/codecov`). The thin orchestrator lives in
 `.dagger/main.go`.
+
+The GitHub Actions workflow (`.github/workflows/ci.yml`) runs the Dagger pipeline for
+lint/typecheck/test/build plus a dedicated headless Playwright E2E job (Chromium) that exercises the
+mocked `/backend/*` routes without a real backend. All third-party Actions are pinned to immutable
+commit SHAs.
 
 Short top-level invocations:
 

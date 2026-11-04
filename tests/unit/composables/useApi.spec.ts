@@ -7,7 +7,7 @@ import { boardsPayload, dfpConfigPayload } from '../../fixtures/jsonapi'
 const request = vi.fn()
 let createOptions: {
   onRequest: (ctx: { options: { headers?: HeadersInit } }) => void
-  onResponseError: (ctx: { response: { status: number } }) => void
+  onResponseError: (ctx: { response: { status: number } }) => Promise<void> | void
 }
 
 beforeEach(() => {
@@ -40,21 +40,23 @@ describe('useApi request interceptor', () => {
     expect(new Headers(options.headers).get('Authorization')).toBeNull()
   })
 
-  it('logs out on 401 responses', () => {
+  it('logs out (which redirects) on 401 responses without navigating twice', async () => {
     const authStore = useAuthStore()
     authStore.token = 'expired'
-    const logout = vi.spyOn(authStore, 'logout').mockResolvedValue()
+    const logout = vi.spyOn(authStore, 'logout')
     useApi()
-    createOptions.onResponseError({ response: { status: 401 } })
-    expect(logout).toHaveBeenCalled()
+    await createOptions.onResponseError({ response: { status: 401 } })
+    expect(logout).toHaveBeenCalledTimes(1)
+    expect(authStore.token).toBeNull()
+    expect((globalThis as Record<string, unknown>).navigateTo).toHaveBeenCalledTimes(1)
     expect((globalThis as Record<string, unknown>).navigateTo).toHaveBeenCalledWith('/login')
   })
 
-  it('ignores non-401 responses', () => {
+  it('ignores non-401 responses', async () => {
     const authStore = useAuthStore()
     const logout = vi.spyOn(authStore, 'logout').mockResolvedValue()
     useApi()
-    createOptions.onResponseError({ response: { status: 500 } })
+    await createOptions.onResponseError({ response: { status: 500 } })
     expect(logout).not.toHaveBeenCalled()
   })
 })

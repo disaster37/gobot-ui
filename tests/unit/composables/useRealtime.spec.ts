@@ -61,6 +61,43 @@ describe('useRealtimeRefresh', () => {
     expect(controller.isPolling.value).toBe(false)
   })
 
+  it('does not overlap polling ticks while a refresh is in flight', async () => {
+    let resolveRefresh: () => void = () => {}
+    const onRefresh = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveRefresh = resolve
+        })
+    )
+    const { controller } = mountRealtime(1000, onRefresh)
+
+    // The mount refresh is still pending (never resolved).
+    expect(onRefresh).toHaveBeenCalledTimes(1)
+
+    controller.start()
+    await vi.advanceTimersByTimeAsync(5000)
+    // Five interval ticks fired but were all skipped while the first is in flight.
+    expect(onRefresh).toHaveBeenCalledTimes(1)
+
+    resolveRefresh()
+    await vi.advanceTimersByTimeAsync(1000)
+    // The guard released after completion, so the next tick runs.
+    expect(onRefresh).toHaveBeenCalledTimes(2)
+  })
+
+  it('releases the in-flight guard after a failed refresh', async () => {
+    const onRefresh = vi.fn().mockRejectedValue(new Error('boom'))
+    const { controller } = mountRealtime(1000, onRefresh)
+
+    await vi.runOnlyPendingTimersAsync()
+    expect(onRefresh).toHaveBeenCalledTimes(1)
+
+    controller.start()
+    await vi.advanceTimersByTimeAsync(2000)
+    // Polling keeps ticking even though every refresh rejects.
+    expect(onRefresh).toHaveBeenCalledTimes(3)
+  })
+
   it('exposes the dispatchServerEvent SSE seam', () => {
     const { controller } = mountRealtime(1000, vi.fn().mockResolvedValue(undefined))
     expect(() => controller.dispatchServerEvent('tfp-states', { id: '1' })).not.toThrow()

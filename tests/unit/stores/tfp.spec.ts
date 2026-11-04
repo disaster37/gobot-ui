@@ -101,6 +101,32 @@ describe('tfp store fetching', () => {
     const store = useTfpStore()
     expect(store.isUVC1BlisterOk).toBe(false)
   })
+
+  it('surfaces a config failure while still loading state', async () => {
+    api.getCollection.mockImplementation((path: string) => {
+      if (path === '/tfp-configs') return Promise.reject(new Error('config down'))
+      if (path === '/tfp-states') return Promise.resolve([state])
+      return Promise.resolve([])
+    })
+    const store = useTfpStore()
+    await store.fetchAll()
+    expect(store.error).toBe('config down')
+    expect(store.state).toEqual(state)
+    expect(store.loading).toBe(false)
+  })
+
+  it('surfaces a state failure while still loading config', async () => {
+    api.getCollection.mockImplementation((path: string) => {
+      if (path === '/tfp-configs') return Promise.resolve([config])
+      if (path === '/tfp-states') return Promise.reject(new Error('state down'))
+      return Promise.resolve([])
+    })
+    const store = useTfpStore()
+    await store.fetchAll()
+    expect(store.error).toBe('state down')
+    expect(store.config).toEqual(config)
+    expect(store.loading).toBe(false)
+  })
 })
 
 describe('tfp store saveConfig / saveState', () => {
@@ -157,9 +183,11 @@ describe('tfp store executeAction', () => {
     const second = store.executeAction('startUVC1')
 
     expect(api.postAction).toHaveBeenCalledTimes(1)
+    expect(store.isAnyActionLoading).toBe(true)
     resolvePost('OK')
     await Promise.all([first, second])
     expect(store.actionLoading.startUVC1).toBe(false)
+    expect(store.isAnyActionLoading).toBe(false)
   })
 
   it('handles action errors', async () => {

@@ -1,0 +1,30 @@
+{
+  "name": "gobot-ui",
+  "engineVersion": "v0.21.8",
+  "sdk": {
+    "source": "go"
+  },
+  "dependencies": [
+    {
+      "name": "dudesons",
+      "source": "github.com/Dudesons/daggerverse/nodejs@20025a28c86e11511da0c8b23b8701c85b6b1e50",
+      "pin": "20025a28c86e11511da0c8b23b8701c85b6b1e50"
+    },
+    {
+      "name": "frontend",
+      "source": "gitlab.com/build-core/daggerverse/node@v0.6.0",
+      "pin": "40f0992e623b325f9fe3717ba01e144535f539e2"
+    },
+    {
+      "name": "image",
+      "source": "github.com/disaster37/dagger-library-go/image@2.0.20",
+      "pin": "e205189be6eba617e7bcc870db2e73a04171f38e"
+    },
+    {
+      "name": "codecov",
+      "source": "github.com/disaster37/dagger-library-go/codecov@2.0.20",
+      "pin": "e205189be6eba617e7bcc870db2e73a04171f38e"
+    }
+  ],
+  "source": ".dagger"
+}

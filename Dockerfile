@@ -1,17 +1,15 @@
-FROM node:24-alpine as builder
+FROM node:24-alpine AS builder
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 WORKDIR /node/app
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
-RUN npm install -g ember-cli@6.4.0
-RUN npm install
-RUN ember build --environment production
-
+RUN npm run build
 
 FROM nginx:1.28-alpine
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-COPY --from=builder /node/app/dist /usr/share/nginx/html
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ="Europe/Paris"
+COPY --from=builder /node/app/.output/public /usr/share/nginx/html
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
-RUN apk upgrade &&\
-  apk add --update bash tzdata
-RUN   rm -rf /tmp/* /var/cache/apk/*
-ENV TZ "Europe/Paris"
+# hadolint ignore=DL3018
+RUN apk upgrade --no-cache && \
+    apk add --no-cache bash tzdata

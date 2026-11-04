@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { loginSchema, type LoginInput } from '~/utils/validation'
+import { resolveLoginRedirect } from '~/utils/redirect'
 
 const authStore = useAuthStore()
 const route = useRoute()
@@ -17,8 +18,7 @@ async function authenticate(): Promise<void> {
   fieldErrors.value = []
   const success = await authStore.login(parsed.data)
   if (success) {
-    const redirect = route.query.redirect
-    await navigateTo(typeof redirect === 'string' ? redirect : '/')
+    await navigateTo(resolveLoginRedirect(route.query.redirect))
   }
 }
 </script>

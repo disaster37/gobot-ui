@@ -1,7 +1,0 @@
-<div class="row">
-    <TfpAction @config={{this.tfpConfig}} @state={{this.tfpState}} @refreshRoute={{this.reload}} />
-    <DfpAction @config={{this.dfpConfig}} @refreshRoute={{this.reload}} />
-    {{#each this.tankStates as |tankState|}}
-    <TankAction @state={{tankState}} @refreshRoute={{this.reload}} />
-    {{/each}}
-</div>

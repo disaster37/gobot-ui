@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+:root {
+  --dfp-header-bg: lightblue;
+  --dfp-footer-bg: lightblue;
+}

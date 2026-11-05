@@ -1,18 +1,30 @@
-# compiled output
-/dist/
-/declarations/
+# Nuxt
+.nuxt
+.output
+.data
+dist
+coverage
 
 # dependencies
 /node_modules/
+
+# logs
+*.log
+npm-debug.log*
+yarn-error.log*
 
 # misc
 /.env*
 /.pnp*
 /.eslintcache
-/coverage/
-/npm-debug.log*
-/testem.log
-/yarn-error.log
+.DS_Store
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
 
-# broccoli-debug
-/DEBUG/
+# Dagger generated code
+/.dagger/internal/
+/.dagger/dagger.gen.go
+/.dagger/go.mod
+/.dagger/go.sum

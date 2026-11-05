@@ -1,17 +1,15 @@
 schemaVersion: 2.2.0
 metadata:
-  name: ember
+  name: dfp-ui
 components:
   - name: tools
     container:
-      image: quay.io/webcenter/developer-image:ember-ubi9-latest
+      image: node:24
       env:
-        - name: GOPATH
-          value: /projects:/home/user/go
-        - name: GOCACHE
-          value: /tmp/.cache
         - name: DOCKER_HOST
           value: tcp://localhost:2375
+        - name: NUXT_TELEMETRY_DISABLED
+          value: '1'
       endpoints:
         - name: api
           targetPort: 8080
@@ -44,37 +42,64 @@ components:
       memoryRequest: 1Gi
 
 commands:
-  - id: run
+  - id: install
     exec:
-      label: "1.1 Run"
+      label: '1.1 Install dependencies'
       component: tools
       workingDir: ${PROJECT_SOURCE}/
-      commandLine: "go run ."
+      commandLine: 'npm ci'
+      group:
+        kind: build
+
+  - id: run
+    exec:
+      label: '1.2 Run'
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/
+      commandLine: 'npm run dev'
       group:
         kind: run
 
   - id: stop
     exec:
-      label: "1.2 Stop"
+      label: '1.3 Stop'
       component: tools
-      commandLine: "kill $(pidof go)"
+      commandLine: 'pkill -f "nuxt dev" || true'
       group:
         kind: run
 
   - id: test
     exec:
-      label: "1.3 Test"
+      label: '1.4 Test'
       component: tools
       workingDir: ${PROJECT_SOURCE}/
-      commandLine: "go test -v"
+      commandLine: 'npm run test:coverage'
       group:
         kind: test
 
-  - id: run-current-file
+  - id: lint
     exec:
-      label: "Run current file"
+      label: '1.5 Lint'
       component: tools
-      workingDir: ${fileDirname}
-      commandLine: "go run ${file}"
+      workingDir: ${PROJECT_SOURCE}/
+      commandLine: 'npm run lint'
       group:
-        kind: run
+        kind: test
+
+  - id: typecheck
+    exec:
+      label: '1.6 Typecheck'
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/
+      commandLine: 'npm run typecheck'
+      group:
+        kind: test
+
+  - id: build
+    exec:
+      label: '1.7 Build'
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/
+      commandLine: 'npm run build'
+      group:
+        kind: build

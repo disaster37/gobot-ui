@@ -7,7 +7,7 @@ import (
 )
 
 // GobotUi orchestrates the dfp-ui/pond dashboard build using only Daggerverse
-// modules: Dudesons/nodejs, build-core/node, disaster37/image and disaster37/codecov.
+// modules: Dudesons/nodejs, disaster37/image and disaster37/codecov.
 type GobotUi struct{}
 
 func (m *GobotUi) baseNode(src *dagger.Directory, nodeVersion string) *dagger.Dudesons {
@@ -48,17 +48,6 @@ func (m *GobotUi) Build(src *dagger.Directory) *dagger.Directory {
 	return m.baseNode(src, "24").
 		Build().
 		Directory(dagger.DudesonsDirectoryOpts{Path: ".output/public"})
-}
-
-// BuildStaticImage builds the Nginx SPA container via gitlab.com/build-core/daggerverse/node.
-func (m *GobotUi) BuildStaticImage(src *dagger.Directory) *dagger.Container {
-	return dag.Frontend(dagger.FrontendOpts{NodeVersion: "24"}).
-		BuildStatic(src, dagger.FrontendBuildStaticOpts{
-			PackageManager:  "npm",
-			NodeVersion:     "24",
-			OutputDir:       ".output/public",
-			NginxConfigPath: "docker/nginx.conf",
-		})
 }
 
 // Ci runs the full pipeline across Dudesons/nodejs, disaster37/codecov, and disaster37/image.

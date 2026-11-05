@@ -71,9 +71,11 @@ npm run test:e2e       # playwright test
 
 ## Dagger CI
 
-The pipeline delegates 100% to pinned Daggerverse modules (`Dudesons/node`,
-`build-core/node`, `disaster37/image`, `disaster37/codecov`). The thin orchestrator lives in
-`.dagger/main.go`.
+The pipeline delegates to pinned Daggerverse modules (`Dudesons/nodejs`,
+`disaster37/image`, `disaster37/codecov`). The thin orchestrator lives in
+`.dagger/main.go`. The production Nginx image is built by
+`disaster37/dagger-library-go/image`, which lints the `Dockerfile` and builds the full image
+(the Dockerfile itself runs `npm run build` and serves `.output/public`).
 
 The GitHub Actions workflow (`.github/workflows/ci.yml`) runs the Dagger pipeline for
 lint/typecheck/test/build plus a dedicated headless Playwright E2E job (Chromium) that exercises the
@@ -87,7 +89,6 @@ dagger call lint --src=.
 dagger call typecheck --src=.
 dagger call test --src=. export --path=./coverage
 dagger call build --src=. export --path=./.output/public
-dagger call build-static-image --src=. sync
 dagger call ci --src=.
 ```
 
@@ -108,17 +109,8 @@ dagger call -m github.com/Dudesons/daggerverse/nodejs@20025a28c86e11511da0c8b23b
   directory --path=coverage \
   export --path=./coverage
 
-# Build the Nginx SPA container (gitlab.com/build-core/daggerverse/node)
-dagger call -m gitlab.com/build-core/daggerverse/node@40f0992e623b325f9fe3717ba01e144535f539e2 \
-  build-static \
-  --src=. \
-  --package-manager=npm \
-  --node-version=24 \
-  --output-dir=.output/public \
-  --nginx-config-path=docker/nginx.conf \
-  sync
-
-# Lint Dockerfile + Build image (disaster37/dagger-library-go/image)
+# Lint Dockerfile + build production Nginx image (disaster37/dagger-library-go/image)
+# The Dockerfile runs `npm run build` and serves .output/public with Nginx.
 dagger call -m github.com/disaster37/dagger-library-go/image@e205189be6eba617e7bcc870db2e73a04171f38e \
   ci --source=. --dockerfile=Dockerfile
 

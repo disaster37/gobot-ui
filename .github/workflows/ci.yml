@@ -91,7 +91,7 @@ jobs:
           retention-days: 7
 
   image-ci:
-    name: 'Docker Image CI (via build-core/node & disaster37/image)'
+    name: 'Docker Image CI (via disaster37/image)'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: node-ci
@@ -101,22 +101,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-
-      - name: Build Static Nginx SPA Container (via gitlab.com/build-core/daggerverse/node)
-        uses: dagger/dagger-for-github@f8f5cba17a33e559ce14ba624d6b64153d1412a4 # v7.0.6
-        with:
-          version: 'v0.21.8'
-          verb: call
-          module: gitlab.com/build-core/daggerverse/node@40f0992e623b325f9fe3717ba01e144535f539e2
-          args: >-
-            build-static
-            --src=.
-            --package-manager=npm
-            --node-version=24
-            --output-dir=.output/public
-            --nginx-config-path=docker/nginx.conf
-            sync
-          cloud-token: ${{ secrets.DAGGER_CLOUD_TOKEN }}
 
       - name: Lint Dockerfile & Build Image (via disaster37/dagger-library-go/image)
         uses: dagger/dagger-for-github@f8f5cba17a33e559ce14ba624d6b64153d1412a4 # v7.0.6
